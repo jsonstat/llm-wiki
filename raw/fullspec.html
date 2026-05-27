@@ -1,0 +1,1290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Full Spec. JSON-stat</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="JSON-stat is a simple lightweight standard best suited for data visualization, mobile apps or open data initiatives, that has been designed for all kinds of disseminators." />
+		<meta name="author" content="Xavier Badosa https://xavierbadosa.com" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@jsonstat" />
+		<meta name="twitter:creator" content="@jsonstat" />
+		<meta name="twitter:title" content="JSON-stat" />
+		<meta name="twitter:description" content="JSON-stat is a simple lightweight standard best suited for data visualization, mobile apps or open data initiatives, that has been designed for all kinds of disseminators." />
+		<meta name="twitter:image:src" content="//json-stat.org/i/apple-touch-icon-144.png" />
+
+		<link href="/s/200802.css" rel="stylesheet" />
+	    <script src="/ext/google-code-prettify/prettify.js"></script>
+		<!--[if lte IE 7]><script src="/j/lte-ie7.js"></script><![endif]-->
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="/j/html5shiv.js"></script>
+		<![endif]-->
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="apple-touch-icon" sizes="144x144" href="/i/apple-touch-icon-144.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="/i/apple-touch-icon-114.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="/i/apple-touch-icon-72.png" />
+		<link rel="apple-touch-icon" href="/i/apple-touch-icon-57.png" />
+		<link rel="shortcut icon" href="/favicon.ico">
+	</head>
+
+	<body id="top">
+		<header class="navbar navbar-inverse navbar-fixed-top">
+			<nav class="navbar-inner">
+				<div class="container-fluid">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="active brand" href="/">JSON-stat</a>
+					<div class="nav-collapse collapse">
+						<p class="navbar-text pull-right">
+							<a href="https://twitter.com/jsonstat" class="navbar-link" aria-hidden="true" data-icon="&#xe011;"><span class="visuallyhidden">Twitter</span></a>
+							<a href="https://groups.google.com/g/json-stat" class="navbar-link" aria-hidden="true" data-icon="&#xe01f;"><span class="visuallyhidden">Google Group</span></a>
+							<a href="https://github.com/jsonstat/jsonstat" class="navbar-link" aria-hidden="true" data-icon="&#xe014;"><span class="visuallyhidden">Github</span></a>
+						</p>
+						<ul class="nav">
+							<li class="active"><a href="/format/">Format</a></li>
+							<li class=""><a href="/tools/">Tools</a></li>
+							<li class=""><a href="/schema/">Schema</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header><div class="container-fluid">
+
+	<div class="row-fluid">
+		<div class="hero-unit">
+			<div class="row-fluid">
+				<div class="span8">
+					<p>This section is dedicated to the <strong>full specification of the JSON-stat format</strong>. If you are new to the format, please read the <strong><a href="/format/">simplified version of the JSON-stat 2.0 Dataset format</a></strong> first.</p><p>You can check JSON-stat 2.0 documents with the <strong><a href="/format/validator/">JSON-stat Format Validator</a></strong>, or use your preferred validator with the following <a href="http://json-schema.org/">JSON Schemas</a>:</p><ul><li><strong><a href="/format/schema/2.0/">JSON-stat 2.0 Schema</a></strong></li><li><strong><a href="/format/schema/2.0/dataset.json">JSON-stat 2.0 Dataset Schema</a></strong></li><li><strong><a href="/format/schema/2.0/collection.json">JSON-stat 2.0 Collection Schema</a></strong></li><li><strong><a href="/format/schema/2.0/dimension.json">JSON-stat 2.0 Dimension Schema</a></strong></li></ul><p>Apart from reading the documentation, you can also learn the format checking the <strong>sample files</strong> at your disposal. Besides these madeup files, many statistical offices, government departments and organizations offer hundreds of updated JSON-stat responses.</p>
+				</div>
+				<aside class="span4 box"><h4>Sample files</h4><ul class="links"><li><a href="/samples/oecd.json" data-toggle="tooltip" data-placement="top" title="A dataset that illustrates the main JSON-stat features (data from OECD)">oecd.json</a></li><li><a href="/samples/canada.json" data-toggle="tooltip" data-placement="top" title="A dataset that illustrates the main JSON-stat features (data from Statistics Canada)">canada.json</a></li><li><a href="/samples/oecd-canada-col.json" data-toggle="tooltip" data-placement="top" title="A collection of embedded datasets (data from OECD and Statistics Canada)">oecd-canada-col.json</a></li><li><a href="/samples/galicia.json" data-toggle="tooltip" data-placement="top" title="A dataset about population in Galicia with many dimensions (6)">galicia.json</a></li><li><a href="/samples/order.json" data-toggle="tooltip" data-placement="top" title="Fake dataset to illustrate how values must be ordered">order.json</a></li><li><a href="/samples/hierarchy.json" data-toggle="tooltip" data-placement="top" title="A dataset with a hierarchical dimension (the Australian Bureau of Statistics’ Consumer Price Index Commodity Classification)">hierarchy.json</a></li><li><a href="/samples/us-gsp.json" data-toggle="tooltip" data-placement="top" title="A dataset for mapping tests with several metrics and units (US States)">us-gsp.json</a></li><li><a href="/samples/us-unr.json" data-toggle="tooltip" data-placement="top" title="A dataset for rich mapping tests (US Counties)">us-unr.json</a></li><li><a href="/samples/us-labor.json" data-toggle="tooltip" data-placement="top" title="Big dataset for stress testing">us-labor.json</a></li><li><a href="/samples/collection.json" data-toggle="tooltip" data-placement="top" title="The JSON-stat dataset sample collection">collection.json</a></li></ul></aside>
+			</div>
+		</div>
+	</div>
+
+	<article class="row-fluid">
+		<div class="span3">
+			<div class="sidebar-nav">
+				<ul class="nav nav-list">
+					<li><a href="#version">version</a></li><li><a href="#class">class</a></li><li><a href="#id">id</a></li><li><a href="#size">size</a></li><li><a href="#role">role</a></li><li><a href="#time">time</a></li><li><a href="#geo">geo</a></li><li><a href="#metric">metric</a></li><li><a href="#value">value</a></li><li><a href="#status">status</a></li><li><a href="#dimension">dimension</a></li><li><a href="#dimensionid">dimension ID</a></li><li><a href="#category">category</a></li><li><a href="#index">index</a></li><li><a href="#label">label</a></li><li><a href="#child">child</a></li><li><a href="#coordinates">coordinates</a></li><li><a href="#unit">unit</a></li><li><a href="#decimals">decimals</a></li><li><a href="#symbol">symbol</a></li><li><a href="#position">position</a></li><li><a href="#updated">updated</a></li><li><a href="#source">source</a></li><li><a href="#extension">extension</a></li><li><a href="#href">href</a></li><li><a href="#link">link</a></li><li><a href="#relationid">relation ID</a></li><li><a href="#type">type</a></li><li><a href="#note">note</a></li><li><a href="#error">error</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="span9 main">
+			<h2>JSON-stat Format</h2>
+			<div class="version">v. 2.0
+</div>
+			<section id="version"><h3>version</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">2.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It declares the JSON-stat version of the response. The goal of this property is to help clients parsing that particular response.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>Because future versions could add optional properties, the same response can be valid in several versions: any of such versions is accepted as a value of <strong>version</strong>.</p>
+
+<div class="alert alert-error">
+   <h4>Before version 2.0</h4>
+   <p><strong>version</strong> was introduced in version 2.0. That&rsquo;s why this property can&rsquo;t accept values lower than 2.0.</p>
+</div></section><section id="class"><h3>class</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td>Root, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+         <tr><th>Children</th><td>None</td></tr>
+    </tbody>
+</table>
+
+<p>JSON-stat supports several classes of responses. Possible values of <strong>class</strong> are: <em>dataset</em>, <em>dimension</em> and <em>collection</em>.</p>
+
+<p><strong>Dataset responses</strong> include a single dataset. They are declared using the <em>dataset</em> <strong>class</strong> value.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "label" : "Unemployment rate in the OECD countries 2003-2014",
+   "source" : "Economic Outlook No 92 - December 2012 - OECD Annual Projections",
+   "updated" : "2012-11-27",
+   "id" : ["concept", "area", "year"],
+   "size" : [1, 36, 12],
+   "dimension" : { <span class="nocode">&hellip;</span> },
+   "value" : [ <span class="nocode">&hellip;</span> ]
+}
+</pre>
+
+<p>See the <a href="/samples/oecd.json">oecd.json</a> sample file.</p>
+
+<strong>Dimension responses</strong> only include a dimension node.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dimension",
+   "label" : "sex",
+   "category" : {
+      "index" : ["T", "M", "F"],
+      "label" : {
+          "T" : "total",
+          "M" : "male",
+          "F" : "female"
+      }
+   }
+}
+</pre>
+
+<strong>Collection responses</strong> reference items in a collection. They use the <a class="prop" href="#link">link</a> property with a <a class="prop" href="#relationid">relation</a> of <em>item</em>. The items of the collection can be of any class (datasets, dimensions, collections).</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "collection",
+   "href" : "https://json-stat.org/samples/collection.json",
+   "label" : "JSON-stat Dataset Sample Collection",
+   "updated" : "2015-07-02",
+   "link" : {
+      "item" : [
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/oecd.json",
+            "label" : "Unemployment rate in the OECD countries 2003-2014"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/canada.json",
+            "label" : "Population by sex and age group. Canada. 2012"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/galicia.json",
+            "label" : "Population by province of residence, place of birth, age, gender and year in Galicia"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/us-gsp.json",
+            "label" : "US States by GSP and population"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/us-unr.json",
+            "label" : "Unemployment Rates by County, 2012 Annual Averages"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/us-labor.json",
+            "label" : "Labor Force Data by County, 2012 Annual Averages"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/order.json",
+            "label"  : "Demo of value ordering: what does not change, first"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/hierarchy.json",
+            "label" : "Demo of hierarchical dimension"
+         }
+      ]
+   }
+}
+</pre>
+
+<p>See the <a href="/samples/collection.json">collection.json</a> sample file.</p>
+
+<div class="alert alert-error">
+   <h4>Before version 2.0</h4>
+   <p><em>class</em> was introduced in version 2.0. Before, all responses were bundle responses.</p>
+   <p><strong>Bundle responses</strong> could contain several datasets. They took the form of a map where dataset IDs were the keys and the values were objects that contained the dataset information.</p>
+   <p>See the <a href="/samples/oecd-canada.json">oecd-canada.json</a> sample file.</p>
+</div></section><section id="id"><h3>id</h3><p><span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dataset"), <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It contains an ordered list of dimension IDs.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class": "dataset",
+   "id" : ["metric", "time", "geo", "sex"],
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>Dimension IDs can be any string and have no special meaning in JSON-stat. Use <a class="prop" href="#role">role</a> to assign a particular meaning to them.</p>
+
+<div class="alert alert-error">
+   <h4>Before version 2.0</h4>
+   <p>Properties <a class="prop" href="#id">id</a>, <a class="prop" href="#size">size</a> and <a class="prop" href="#role">role</a> were children of <a class="prop" href="#dimension">dimension</a>.</p>
+   <p>Data providers that depend on JSON-stat libraries that are not yet 2.0-ready are advised, as a transitional strategy, to include those three properties at the root level (2.0) <em>and</em> as children of <a class="prop" href="#dimension">dimension</a> (&lt;2.0).</p>
+</div></section><section id="size"><h3>size</h3><p><span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dataset"), <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It contains the number (integer) of categories (possible values) of each dimension in the dataset. It has the same number of elements and in the same order as in <a class="prop" href="#id">id</a>.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "id" : ["metric", "time", "geo", "sex"],
+   "size" : [1, 1, 1, 3],
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<div class="alert alert-error">
+   <h4>Before version 2.0</h4>
+   <p>Properties <a class="prop" href="#id">id</a>, <a class="prop" href="#size">size</a> and <a class="prop" href="#role">role</a> were children of <a class="prop" href="#dimension">dimension</a>.</p>
+   <p>Data providers that depend on JSON-stat libraries that are not yet 2.0-ready are advised, as a transitional strategy, to include those three properties at the root level (2.0) <em>and</em> as children of <a class="prop" href="#dimension">dimension</a> (&lt;2.0).</p>
+</div></section><section id="role"><h3>role</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dataset"), <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td><a class="prop" href="#time">time</a>, <a class="prop" href="#geo">geo</a> and <a class="prop" href="#metric">metric</a></td></tr>
+   </tbody>
+</table>
+
+<p>It can be used to assign special roles to dimensions. At this moment, possible roles are: <a class="prop" href="#time">time</a>, <a class="prop" href="#geo">geo</a> and <a class="prop" href="#metric">metric</a>. A role can be shared by several dimensions.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "id" : ["concept", "arrivaldate", "departuredate", "origin", "destination"],
+   "size" : [1, 24, 24, 10, 10],
+   "role": {
+      "time": ["arrivaldate", "departuredate"],
+      "geo": ["origin", "destination"],
+      "metric": ["concept"]
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<div class="alert alert-error">
+   <h4>Before version 2.0</h4>
+   <p>Properties <a class="prop" href="#id">id</a>, <a class="prop" href="#size">size</a> and <a class="prop" href="#role">role</a> were children of <a class="prop" href="#dimension">dimension</a>.</p>
+   <p>Data providers that depend on JSON-stat libraries that are not yet 2.0-ready are advised, as a transitional strategy, to include those three properties at the root level (2.0) <em>and</em> as children of <a class="prop" href="#dimension">dimension</a> (&lt;2.0).</p>
+</div></section><section id="time"><h3>time</h3><p><span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#role">role</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It can be used to assign a time <a class="prop" href="#role">role</a> to one or more dimensions. It takes the form of an array of dimension IDs in which order does not have a special meaning.</p>
+
+<pre class="prettyprint">
+"role": {
+   "time": ["arrivaldate", "departuredate"]
+}
+</pre></section><section id="geo"><h3>geo</h3><p><span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#role">role</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It can be used to assign a spatial <a class="prop" href="#role">role</a> to one or more dimensions. It takes the form of an array of dimension IDs in which order does not have a special meaning.</p>
+
+<pre class="prettyprint">
+"role": {
+   "geo": ["origin", "destination"]
+}
+</pre></section><section id="metric"><h3>metric</h3><p><span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#role">role</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It can be used to assign a metric <a class="prop" href="#role">role</a> to one or more dimensions. It takes the form of an array of dimension IDs in which order does not have a special meaning.</p>
+
+<pre class="prettyprint">
+"role": {
+   "metric": ["concept"]
+}
+</pre></section><section id="value"><h3>value</h3><p><span class="badge">array</span> <span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dataset"), <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It contains the data sorted according to the dataset <a class="prop" href="#id">dimensions</a>. It usually takes the form of an array where missing values are expressed as <em>nulls</em>.</p>
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [105.3, 104.3, null, 177.2, <span class="nocode">&hellip;</span>],
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>When too many cube cells are empty (<strong>sparse cube</strong>), the <strong>value</strong> array is populated with <em>nulls</em>. </p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [1.3587, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.5849],
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>To avoid this, the <strong>value</strong> property can take the form of an object.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : { "0": 1.3587, "18": 1.5849 },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p><strong>Value order</strong> follows the &ldquo;What does not change, first&rdquo; criterion. According to this criterion, values are ordered by combination of category dimensions keeping fixed the first categories of the first dimensions and iterating through the categories of the last dimension in the <a class="prop" href="#id">id</a> array (and so forth).</p>
+
+<p>For example, if we have three dimensions (A, B and C) with 3, 2 and 4 categories respectively, the values should be ordered iterating first by the 4 categories of C, then by the 2 categories of B and finally by the 3 categories of A:</p>
+
+<pre class="prettyprint">
+A1B1C1   A1B1C2   A1B1C3   A1B1C4
+A1B2C1   A1B2C2   A1B2C3   A1B2C4
+
+A2B1C1   A2B1C2   A2B1C3   A1B1C4
+A2B2C1   A2B2C2   A2B2C3   A2B2C4
+
+A3B1C1   A3B1C2   A3B1C3   A3B1C4
+A3B2C1   A3B2C2   A3B2C3   A3B2C4
+</pre>
+
+<p>This flattening method is known as <a href="https://en.wikipedia.org/wiki/Row-major_order">row-major order</a>.</p>
+
+<p>The <a href="/samples/order.json">order.json</a> file is provided as a JSON-stat example of value and dimension sorting.</p></section><section id="status"><h3>status</h3><p><span class="badge">array</span> <span class="badge">object</span> <span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dataset"), <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It contains metadata at the observation level. When it takes an array form of the same size of <strong>value</strong>, it assigns a status to each data by position.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [100, null, 102, 103, 104],
+   "status" : ["a", "m", "a", "a", "p"],
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>To assign the same status to all data, an array of size 1 can be used.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [100, 99, 102, 103, 104],
+   "status" : ["e"],
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>For the same purpose, a string can be used (this is the recommended way to assign the same status to all data).</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [100, 99, 102, 103, 104],
+   "status" : "e",
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>An object can also be used to provide status information for specific cells.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [100, null, 102, 103, 104],
+   "status" : { "1" : "m" },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>Currently, &ldquo;status&rdquo; does not have a standard meaning nor a standard vocabulary. These are, for the moment, up to the provider. It can be used to optionally include <em>any</em> metadata information at the observation level, not only what is regularly known as &ldquo;status&rdquo;. If the vocubulary does not adhere to a standard, there is no way yet to assign meaning to the status codes in the same response.</p></section><section id="dimension"><h3>dimension</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dataset"), <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td><a class="prop" href="#dimensionid">dimension ID</a></td></tr>
+   </tbody>
+</table>
+
+<p>JSON-stat follows a cube model: the <a class="prop" href="#values">values</a> are organized in cells, and a cell is the intersection of various dimensions. The <strong>dimension</strong> property contains information about the dimensions of the dataset.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "value" : [4729, 4832, 9561],
+   "dimension" : {
+      <span class="nocode">&hellip;</span>
+   }
+}
+</pre>
+
+<p><a class="prop" href="#dimension">dimension</a> must have properties (see <a class="prop" href="#dimensionid">dimension ID</a>) with the same names of each element in the <a class="prop" href="#id">id</a> array.</p>
+
+
+<div class="alert alert-error">
+   <h4>Before version 2.0</h4>
+   <p>Properties <a class="prop" href="#id">id</a>, <a class="prop" href="#size">size</a> and <a class="prop" href="#role">role</a> were children of <strong>dimension</strong>.</p>
+</div></section><section id="dimensionid"><h3>dimension ID</h3><p><span class="badge">object</span> <span class="badge label-success">free word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#dimension">dimension</a></td></tr>
+      <tr><th>Children</th><td><a class="prop" href="#category">category</a>, <a class="prop" href="#label">label</a>, <a class="prop" href="#class">class</a></td></tr>
+   </tbody>
+</table>
+
+<p>It is used to describe a particular dimension. The name of this object must be one of the strings in the <a class="prop" href="#id">id</a> array. There must be one and only one dimension ID object for every dimension in the <a class="prop" href="#id">id</a> array.</p>
+
+<pre class="prettyprint">
+"dimension" : {
+   "metric" : { <span class="nocode">&hellip;</span> },
+   "time" : { <span class="nocode">&hellip;</span> },
+   "geo" : { <span class="nocode">&hellip;</span> },
+   "sex" : { <span class="nocode">&hellip;</span> },
+   <span class="nocode">&hellip;</span>
+}
+</pre></section><section id="category"><h3>category</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-important">required</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root (when class "dimension"), <a class="prop" href="#dimensionid">dimension ID, <a class="prop" href="#relationid">relation ID</a> array element</a></td></tr>
+      <tr><th>Children</th><td><a class="prop" href="#index">index</a>, <a class="prop" href="#label">label</a>, <a class="prop" href="#child">child</a>, <a class="prop" href="#coordinates">coordinates</a>, <a class="prop" href="#unit">unit</a></td></tr>
+   </tbody>
+</table>
+
+<p>It is used to describe the possible values of a dimension.</p>
+
+<pre class="prettyprint">
+"sex" : {
+   "category" : { <span class="nocode">&hellip;</span> }
+}
+</pre></section><section id="index"><h3>index</h3><p><span class="badge">object</span> <span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#category">category</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It is used to order the possible values (categories) of a dimension. The order of the categories and the order of the <a class="prop" href="#id">dimensions</a> themselves determine the order of the data in the <a class="prop" href="#value">value</a> array. While the dimensions&rsquo; order has only this functional role (and therefore any order chosen by the provider is valid), the categories&rsquo; order has also a <strong>presentation role</strong>: it is assumed that the categories are sorted in a meaningful order and that the consumer can rely on it when displaying the information. For example, categories in dimensions with a <a class="prop" href="#time">time</a> <a class="prop" href="#role">role</a> are assumed to be in chronological order.</p>
+
+<p>To provide the category IDs and their order, an array can be used.</p>
+
+<pre class="prettyprint">
+"sex" : {
+   "category" : {
+      "index" : ["M", "F", "T"]
+   }
+}
+</pre>
+
+<p>An object that attaches a position to every ID can also be used.</p>
+
+<pre class="prettyprint">
+"sex" : {
+   "category" : {
+      "index" : {
+          "M" : 0,
+          "F" : 1,
+          "T" : 2
+      }
+   }
+}
+</pre>
+
+<p><strong>index</strong> is <strong>required</strong> unless the dimension is a constant dimension (dimension with a single category). When a dimension has only one category, the index property is indeed unnecessary. In the case that a category <strong>index</strong> is not provided, a category <a class="prop" href="#label">label</a> must be included.</p></section><section id="label"><h3>label</h3><p><span class="badge">string</span> <span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#category">category</a>, <a class="prop" href="#unit">unit</a> category ID, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It is used to assign a very short (one line) descriptive text to IDs at different levels of the response tree. It is language-dependent.</p>
+
+<p>When it is a root property or a child of <a class="prop" href="#dimensionid">dimension ID</a> or of a <a class="prop" href="#unit">unit</a> category ID, it is a string.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "label" : "Tuvalu population by sex in the 2002 Census",
+   "dimension" : {
+      "sex" : {
+          "label" : "sex",
+          <span class="nocode">&hellip;</span>
+      },
+      <span class="nocode">&hellip;</span>
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>When it is a child of <a class="prop" href="#category">category</a>, it is an object where the keys are the category IDs and the values are the labels.</p>
+
+<pre class="prettyprint">
+"sex" : {
+   "label" : "sex",
+   "category" : {
+      "index" : {
+         "M" : 0,
+         "F" : 1,
+         "T" : 2
+      },
+      "label" : {
+         "M" : "men",
+         "F" : "women",
+         "T" : "total"
+      }
+   }
+}
+</pre>
+
+<p><strong>label</strong> content should be written in lowercase except when it is a dataset label (when label is a root property of a response with <a class="prop" href="#class">class</a> dataset). It&rsquo;s the client&rsquo;s job to capitalize it when needed according to the display context.</p>
+
+<p>Sometimes, the dimension categories have a hierarchical relationship. This relationship can be expressed using the <a class="prop" href="#child">child</a> property.</p>
+
+<p>When no category labels are provided, the recommended behavior for a JSON-stat client is to use the IDs (as they appear in <a class="prop" href="#index">index</a>) as labels. In this case, IDs should be chosen wisely.</p>
+
+<pre class="prettyprint">
+"year" : {
+    "category" : {
+         "index" : {
+             "2003" : 0,
+             "2004" : 1,
+             "2005" : 2,
+             "2006" : 3,
+             "2007" : 4,
+             "2008" : 5,
+             "2009" : 6,
+             "2010" : 7,
+             "2011" : 8,
+             "2012" : 9,
+             "2013" : 10,
+             "2014" : 11
+         }
+    <span class="strike">,</span>
+         <span class="strike">"label" : {</span>
+             <span class="strike">"2003" : "2003",</span>
+             <span class="strike">"2004" : "2004",</span>
+             <span class="strike">"2005" : "2005",</span>
+             <span class="strike">"2006" : "2006",</span>
+             <span class="strike">"2007" : "2007",</span>
+             <span class="strike">"2008" : "2008",</span>
+             <span class="strike">"2009" : "2009",</span>
+             <span class="strike">"2010" : "2010",</span>
+             <span class="strike">"2011" : "2011",</span>
+             <span class="strike">"2012" : "2012",</span>
+             <span class="strike">"2013" : "2013",</span>
+             <span class="strike">"2014" : "2014"</span>
+         <span class="strike">}</span>
+    }
+}
+</pre>
+
+<p>When a dimension is a constant dimension (dimension with a single category) and no category <a class="prop" href="#index">index</a> is provided for it, category label is <strong>required</strong>.</p>
+
+<pre class="prettyprint">
+"metric" : {
+   "category" : {
+      <span class="strike">"index" : {</span>
+         <span class="strike">"pop" : 0</span>
+      <span class="strike">},</span>
+      "label" : {
+         "pop" : "population"
+      }
+   }
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>Of course, if the dimension is constant and the label is not important, you can choose to remove the category <strong>label</strong> instead of the category <a class="prop" href="#index">index</a>.</p>
+
+<pre class="prettyprint">
+"year" : {
+   "category" : {
+      "index" : {
+         "2013" : 0
+      }<span class="strike">,</span>
+      <span class="strike">"label" : {</span>
+         <span class="strike">"2013" : "2013"</span>
+      <span class="strike">}</span>
+   }
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p><a class="prop" href="#unit">unit</a> label is a text that can be displayed after values (like &ldquo;millions of tonnes&rdquo;). The use of unit <strong>label</strong> is recommended, unless this information has already been provided in a parent label property. This last practice is discouraged: for example, when possible, a metric category label should not contain the <a class="prop" href="#unit">unit</a> label:</p>
+
+<pre class="prettyprint">
+"label": {
+   "exp": "exports (tonnes)"
+}
+</pre>
+
+<p>Better:</p>
+
+<pre class="prettyprint">
+"label": {
+   "exp": "exports"
+},
+"unit": {
+   "exp": {
+      "label": "tonnes"
+   }
+}
+</pre></section><section id="child"><h3>child</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#category">category</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It is used to describe the hierarchical relationship between different categories. It takes the form of an object where the key is the ID of the parent category and the value is an array of the IDs of the child categories. It is also a way of exposing a certain category as a total.</p>
+
+<pre class="prettyprint">
+"actstatus": {
+    "label":"activity status",
+    "category": {
+         "index": {
+             "A" : 0,
+             "E" : 1,
+             "U" : 2,
+             "I" : 3,
+             "T" : 4
+         },
+         "label": {
+             "A" : "active population",
+             "E" : "employment",
+             "U" : "unemployment",
+             "I" : "inactive population"
+             "T" : "population 15 years old and over"
+         },
+         "child": {
+             "A" : ["E", "U"],
+             "T" : ["A", "I"]
+         }
+    }
+}
+</pre>
+
+<p>When there are several hierarchy levels, like in the previous example, <strong>child</strong> must reference only the direct descendants. For example, the <a href="/samples/oecd.json">oecd.json</a> sample file includes a total (<abbr title="Organisation for Economic Co-operation and Development">OECD</abbr>) and a subtotal (<abbr title="first 15 member countries in the European Union">EU15</abbr>): the 15 countries in EU15 are not directly referenced as OECD countries.</p>
+
+<pre class="prettyprint">
+"child" : {
+    "EU15" : [
+         "AT",
+         "BE",
+         "DE",
+         "DK",
+         "ES",
+         "FI",
+         "FR",
+         "GR",
+         "IE",
+         "IT",
+         "LU",
+         "NL",
+         "PT",
+         "SE",
+         "UK"
+    ],
+    "OECD" : [
+         "EU15",
+         "AU",
+         "CA",
+         "CL",
+         "CZ",
+         "DK",
+         "EE",
+         "HU",
+         "IS",
+         "IL",
+         "JP",
+         "KR",
+         "MX",
+         "NO",
+         "NZ",
+         "PL",
+         "SK",
+         "SI",
+         "CH",
+         "TR",
+         "US"
+    ]
+}
+</pre>
+
+<p>As an example, see <a href="/samples/hierarchy.json">hierarchy.json</a>.</p></section><section id="coordinates"><h3>coordinates</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#category">category</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It can be used to assign longitude/latitude geographic coordinates to the categories of a dimension with a <a class="prop" href="#geo">geo</a> <a class="prop" href="#role">role</a>. It takes the form of an object where keys are category IDs and values are an array of two numbers (longitude, latitude).</p>
+
+<pre class="prettyprint">
+"category" : {
+    "label" : {
+         "ISO-3166-2:TV" : "Tuvalu"
+    },
+    "coordinates" : {
+         "ISO-3166-2:TV" : [179.1995, -8.5199]
+    }
+}
+</pre>
+
+<p>The goal of JSON-stat is not to provide rich geographical information. To that purpose, use <a href="https://geojson.org/">GeoJSON</a> or <a href="https://github.com/mbostock/topojson">TopoJSON</a> and match your maps areas in those formats with statistical data (in JSON-stat) encoding your geographical categories with common IDs.</p></section><section id="unit"><h3>unit</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#category">category</a></td></tr>
+      <tr><th>Children</th><td>category ID</td></tr>
+   </tbody>
+</table>
+
+<p>It can be used to assign unit of measure metadata to the categories of a dimension with a <a class="prop" href="#metric">metric</a> <a class="prop" href="#role">role</a>.</p>
+
+<pre class="prettyprint">
+"role": {
+   "metric": ["concept"]
+}
+</pre>
+
+<p>It takes the form of an object where category ID is the key and the value is an object.</p>
+
+<pre class="prettyprint">
+"concept" : {
+    "category" : {
+         "label" : {
+             "exp" : "exports"
+         },
+         "unit" : {
+             "exp" : { <span class="nocode">&hellip;</span> }
+         }
+    }
+}
+</pre>
+
+<p>Four properties of this object are currently closed: <a class="prop" href="#decimals">decimals</a>, <a class="prop" href="#label">label</a>, <a class="prop" href="#symbol">symbol</a> and <a class="prop" href="#position">position</a>.</p>
+
+<pre class="prettyprint">
+"unit" : {
+    "exp" : {
+         "decimals": 1,
+         "label" : "millions",
+         "symbol" : "$",
+         "position" : "start"
+    }
+}
+</pre>
+
+<p>Following the previous example, a client could display a value of 10 of metric <em>exp</em> as &ldquo;$10.0 millions&rdquo;.</p>
+
+<p>Based on current standards and practices, other properties of this object could be:</p>
+
+<ul>
+    <li><strong>base</strong>: It is the base unit (person, gram, euro, etc.).</li>
+   <li><strong>type</strong>: This property should probably help deriving new data from the data. It should probably help answering questions like: does it make sense to add two different cell values? Some possible values of this property could be <em>count</em> or <em>ratio</em>. Some might also consider as possible values things like <em>currency</em>, <em>mass</em>, <em>length</em>, <em>time</em>, etc.</li>
+   <li><strong>multiplier</strong>: It is the unit multiplier. It should help comparing data with the same base unit but different multiplier. If a decimal system is used, it can be expressed as powers of 10 (0=1, 1=10, -1=0.1, etc.).</li>
+   <li><strong>adjustment</strong>: A code to express the time series adjustment (for example, seasonally adjusted or adjusted by working days) or indices adjustment (for example, chain-linked indices).</li>
+</ul>
+
+<p>These properties are currently open. Data providers are free to use them on their own terms, although it is safer to do it under <a class="prop" href="#extension">extension</a>.</p></section><section id="decimals"><h3>decimals</h3><p><span class="badge">number</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.2</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td><a class="prop" href="#unit">Unit</a> category ID</td></tr>
+         <tr><th>Children</th><td>None</td></tr>
+    </tbody>
+</table>
+
+<p>It contains the number of unit decimals (integer).  If <a class="prop" href="#unit">unit</a> is present, <strong>decimals</strong> is required.</p></section><section id="symbol"><h3>symbol</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.2</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td><a class="prop" href="#unit">Unit</a> category ID</td></tr>
+         <tr><th>Children</th><td>None</td></tr>
+    </tbody>
+</table>
+
+<p>It contains a possible <a class="prop" href="#unit">unit</a> symbol to add to the value when it is displayed (like &ldquo;&euro;&rdquo;, &ldquo;$&rdquo; or &ldquo;%&rdquo;).</p></section><section id="position"><h3>position</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.2</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td><a class="prop" href="#unit">Unit</a> category ID</td></tr>
+         <tr><th>Children</th><td>None</td></tr>
+    </tbody>
+</table>
+
+<p>It contains the place (<em>start</em> or <em>end</em>, strings) where the <a class="prop" href="#unit">unit</a> symbol should be written (before or after the value). Default is <em>end</em>.</p></section><section id="updated"><h3>updated</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It contains the update time of the dataset. It is a string representing a date in an ISO 8601 format recognized by the Javascript Date.parse method (see <a href="https://262.ecma-international.org/6.0/#sec-date-time-string-format">ECMA-262 Date Time String Format</a>).</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "updated" : "2012-01-22T12:30:02Z",
+   <span class="nocode">&hellip;</span>
+}
+</pre></section><section id="source"><h3>source</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.0</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td>Root, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+         <tr><th>Children</th><td>None</td></tr>
+    </tbody>
+</table>
+
+<p>It contains a language-dependent short text describing the source of the dataset.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "source" : "Economic Outlook No 92 - December 2012 - OECD Annual Projections",
+   <span class="nocode">&hellip;</span>
+}
+</pre></section><section id="extension"><h3>extension</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+         <tr><th>Parents</th><td>Root, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>Open</td></tr>
+   </tbody>
+</table>
+
+<p><strong>extension</strong> allows JSON-stat to be extended for particular needs. Providers are free to define where they include this property and what children are allowed in each case.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "label" : "Unemployment rate in the OECD countries 2003-2014",
+   "source" : "Economic Outlook No 92 - December 2012 - OECD Annual Projections",
+   "updated" : "2012-11-27",
+
+   "extension" : {
+      "contact" : "EcoOutlook@oecd.org",
+      "metadata" : [
+          {
+               "title" : "Economic Outlook Policy and other assumptions underlying the projections Box 1.2 in General assessment",
+               "href" : "https://www.oecd.org/eco/economicoutlookanalysisandforecasts/EO92macroeconomicsituation.pdf"
+          },
+          {
+               "title" : "Economic Outlook Sources and Methods",
+               "href" : "https://www.oecd.org/document/22/0,3343,en_2649_34109_33702486_1_1_1_1,00.html"
+          },
+          {
+               "title" : "Database inventory (forthcoming)",
+               "href" : "https://www.oecd.org/eco/databaseinventory"
+          },
+          {
+               "title" : "OECD Glossary",
+               "href" : "https://stats.oecd.org/glossary/"
+          }
+      ]
+   },
+
+   "value" : [ <span class="nocode">&hellip;</span> ],
+   "id" : [ <span class="nocode">&hellip;</span> ],
+   "size" : [ <span class="nocode">&hellip;</span> ],
+   "dimension" : { <span class="nocode">&hellip;</span> }
+}
+</pre>
+
+<p>Client libraries should provide a general way to retrieve the contents of the <strong>extension</strong> elements. For example:</p>
+
+<pre class="prettyprint">
+J.Dataset(0).extension;
+/* This retrieves the extension object
+    in the first dataset with all its properties
+*/
+
+J.Dataset(0).extension.contact;
+/* This retrieves the extension property "contact"
+    in the first dataset
+*/
+</pre></section><section id="href"><h3>href</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It specifies a <abbr title="Uniform Resource Locator">URL</abbr>.</p>
+
+<p>Providers can use this property to avoid sending information that is shared between different requests (for example, dimensions).</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "label" : "Tuvalu population by sex in the 2002 Census",
+   "dimension" : {
+      "sex" : {
+          "href" : "https://example.com/dimension/sex"
+      },
+      <span class="nocode">&hellip;</span>
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dimension",
+   "href" : "https://example.com/dimension/sex",
+   "label" : "sex",
+   "category" : {
+      "index" : ["T", "M", "F"],
+      "label" : {
+          "T" : "total",
+          "M" : "male",
+          "F" : "female"
+      }
+   }
+}
+</pre>
+
+<p>When it is a descendant of <a class="prop" href="#link">link</a>, it is used to point to related resources.</p></section><section id="link"><h3>link</h3><p><span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td>Root, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td><a class="prop" href="#relationid">relation ID</a></td></tr>
+   </tbody>
+</table>
+
+<p>It is used to provide a list of links related to a dataset or a dimension, sorted by relation (see <a class="prop" href="#relationid">relation ID</a>).</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "label" : "Tuvalu population by sex in the 2002 Census",
+   "href" : "https://example.com/2002/population/sex",
+
+   "link" : {
+      "alternate" : [
+          {
+               "type" : "text/csv",
+               "href" : "https://example.com/2002/population/sex.csv"
+          }
+      ],
+      <span class="nocode">&hellip;</span>
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre></section><section id="relationid"><h3>relation ID</h3><p><span class="badge">array</span> <span class="badge label-success">external word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#link">link</a></td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>This ID must be an <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">IANA link relation name</a> that describes the relation between the elements of the array and the parent of <a class="prop" href="#link">link</a>.</p>
+
+<p>When used to link to non-JSON-stat documents, the elements of the array are objects that can contain a <a class="prop" href="#type">type</a> and an <a class="prop" href="#href">href</a> property.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "link" : {
+       "alternate" : [
+            {
+                "type" : "text/csv",
+                "href" : "https://example.com/2002/population/sex.csv"
+            },
+            {
+                "type" : "text/html",
+                "href" : "https://example.com/2002/population/sex.html"
+            }
+       ],
+       <span class="nocode">&hellip;</span>
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p>When used to link to JSON-stat documents, they can contain the common JSON-stat properties <a class="prop" href="#class">class</a>, <a class="prop" href="#label">label</a>, <a class="prop" href="#href">href</a> and <a class="prop" href="#extension">extension</a>.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "collection",
+   "href" : "https://json-stat.org/samples/collection.json",
+   "label" : "JSON-stat Dataset Sample Collection",
+   "updated" : "2015-07-02",
+   "link" : {
+      "item" : [
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/oecd.json",
+            "label" : "Unemployment rate in the OECD countries 2003-2014"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/canada.json",
+            "label" : "Population by sex and age group. Canada. 2012"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/galicia.json",
+            "label" : "Population by province of residence, place of birth, age, gender and year in Galicia"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/us-gsp.json",
+            "label" : "US States by GSP and population"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/us-unr.json",
+            "label" : "Unemployment Rates by County, 2012 Annual Averages"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/us-labor.json",
+            "label" : "Labor Force Data by County, 2012 Annual Averages"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/order.json",
+            "label"  : "Demo of value ordering: what does not change, first"
+         },
+         {
+            "class" : "dataset",
+            "href" : "https://json-stat.org/samples/hierarchy.json",
+            "label" : "Demo of hierarchical dimension"
+         }
+      ]
+   }
+}
+</pre>
+
+<p>They can also be used to embed full JSON-stat responses of any class.</p>
+
+<pre class="prettyprint">
+{
+    "version" : "2.0",
+    "class" : "collection",
+    "href" : "https://json-stat.org/samples/oecd-canada-col.json",
+    "label" : "OECD-Canada Sample Collection",
+    "updated" : "2015-12-24",
+    "link" : {
+       "item" : [
+          {
+             "class" : "dataset",
+             "href" : "https://json-stat.org/samples/oecd.json",
+             "label" : "Unemployment rate in the OECD countries 2003-2014",
+             "source" : "Economic Outlook No 92 - December 2012 - OECD Annual Projections",
+             "updated" : "2012-11-27",
+             "value" : [5.943826289, 5.39663128, 5.044790587, <span class="nocode">&hellip;</span>],
+             "id" : ["concept", "area", "year"],
+             "size" : [1, 36, 12],
+             "dimension" : {
+                <span class="nocode">&hellip;</span>
+             },
+             <span class="nocode">&hellip;</span>
+          },
+          <span class="nocode">&hellip;</span>
+       ]
+     }
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre></section><section id="type"><h3>type</h3><p><span class="badge">string</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+   <tbody>
+      <tr><th>Parents</th><td><a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+      <tr><th>Children</th><td>None</td></tr>
+   </tbody>
+</table>
+
+<p>It describes the <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">media type</a> of the accompanying <a class="prop" href="#href">href</a>. Not required when the resource referenced in the link is a JSON-stat resource.</p></section><section id="note"><h3>note</h3><p><span class="badge">array</span> <span class="badge">object</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td>None, <a class="prop" href="#dimensionid">dimension ID</a>, <a class="prop" href="#category">category</a>, <a class="prop" href="#relationid">relation ID</a> array element</td></tr>
+         <tr><th>Children</th><td>None</td></tr>
+    </tbody>
+</table>
+
+<p>This is a property similar to <a class="prop" href="#datasetid">label</a>. The main differences are:</p>
+<ul>
+    <li><a class="prop" href="#note">note</a> is used to assign annotations instead of a descriptive text</li>
+    <li>where <a class="prop" href="#label">label</a> uses a string, <a class="prop" href="#note">note</a> uses an array of strings</li>
+</ul>
+
+<p>Please, see <a class="prop" href="#label">label</a> for a general description.</p>
+
+<pre class="prettyprint">
+{
+   "version" : "2.0",
+   "class" : "dataset",
+   "note" : [ "Most of the data in this dataset are taken from the individual contributions of national correspondents appointed by the OECD Secretariat with the approval of the authorities of Member countries. Consequently, these data have not necessarily been harmonised at international level." ],
+   "dimension" : {
+      "country" : {
+          "note" : [ "Except where otherwise indicated, data refer to the actual territory of the country considered." ],
+          "category" : {
+               "note" : {
+                   "DEU" : [ "Germany (code DEU) was created 3 October 1990 by the accession of the Democratic Republic of Germany (code DDR) to the then Federal Republic of Germany (code DEW)." ]
+               },
+               <span class="nocode">&hellip;</span>
+          },
+          <span class="nocode">&hellip;</span>
+      },
+      <span class="nocode">&hellip;</span>
+   },
+   <span class="nocode">&hellip;</span>
+}
+</pre>
+
+<p><a class="prop" href="#note">note</a> allows to assign annotations to datasets (array), dimensions (array) and categories (object). To assign annotations to individual data, use <a class="prop" href="#status">status</a>.</p></section><section id="error"><h3>error</h3><p><span class="badge">array</span> <span class="badge label-warning">reserved word</span> <span class="badge label-info">optional</span> <span class="badge label-inverse" title="Version when it was added">1.1</span></p>
+
+<table class="table table-hover table-doc">
+    <tbody>
+         <tr><th>Parents</th><td>Root</td></tr>
+         <tr><th>Children</th><td>Open</td></tr>
+    </tbody>
+</table>
+
+<p>Dealing with errors (besides using HTTP status codes) in JSON-stat is an open issue. In version 1.1 of the format, a suggestion was added to allow a more semantic error information. According to that sugestion, JSON-stat documents could include an <strong>error</strong> property to communicate response errors. It would take the form of an array of objects, each providing information for an error. Libraries should offer a method to retrieve this array but should also check the validity of the response, as the inclusion of <strong>error</strong> was not mandatory.</p>
+
+<p>The suggestion went further to list some possible elements:</p>
+
+<ul>
+   <li><strong>status</strong>: The HTTP status code (for example, "401").</li>
+    <li><strong>id</strong>: The provider&rsquo;s internal error code (for example, "106").</li>
+   <li><strong>href</strong>: A link to a web page where information about the error is published (for example, "https://example.com/error/106").</li>
+   <li><strong>label</strong>: A short descriptive text about the error. It could be useful to provide two properties: one for the end user ("The selected country does not exist.") and one for the developer ("Parameter 'area' must be an ISO 3166-1 alpha-2 code.").</li>
+</ul>
+
+<p>The suggestion introduced in version 1.1, though, is not probably too conformant with version 2.0 where a specific response for errors makes more sense:</p>
+
+<pre class="prettyprint">
+   {
+      "version" : "2.0",
+      "class" : "error",
+      <span class="nocode">&hellip;</span>
+   }
+</pre></section>
+		</div>
+	</article>
+
+</div>
+	<footer class="container-fluid">
+		<p>&copy; <a href="http://xavierbadosa.com">Xavier Badosa</a> (<a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>) | <span class="nowrap">Icon Set by <a href="http://keyamoon.com/icomoon/">IcoMoon</a> (<a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>) |</span> <span class="nowrap">Background image by <a href="http://http://www.flickr.com/photos/druclimb/2643044332/sizes/l/">Dru!</a> (<a href="http://creativecommons.org/licenses/by-nc/2.0/">CC BY-NC 2.0</a>) |</span> <span class="nowrap">Last update: <time datetime="
+2024-05-24
+">
+2024-05-24
+</time></span></p>
+	</footer>
+
+	<script src="/j/main.js"></script>
+
+	<script>
+		$(window).load(function(){
+			prettyPrint();
+
+			$("h3").css({"cursor":"pointer"})
+				.hover(function(){
+					$(this).append("<span> &uArr;</span>");},
+					function(){$(this).find("span:last").remove();}
+				)
+				.click(function(){
+					document.location.href="#top";
+				})
+			;
+
+			$(".links").tooltip({
+				selector: "a[data-toggle=tooltip]"
+			});
+		});
+
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-27240137-1', 'json-stat.org');
+		ga('send', 'pageview');
+	</script>
+</body>
+</html>
