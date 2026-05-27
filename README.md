@@ -130,7 +130,7 @@ The following diagram summarizes the three-phase lifecycle:
 ┌─────────────────────────────────────────────────────────┐
 │                      INGEST                             │
 │                                                         │
-│   raw/new-doc.pdf ──► LLM reads & extracts ──► wiki/   │
+│   raw/new-doc.pdf ──► LLM reads & extracts ──► wiki/    │
 │                        ┌──────────────┐                 │
 │                        │ Create pages │                 │
 │                        │ Update pages │                 │
@@ -141,13 +141,13 @@ The following diagram summarizes the three-phase lifecycle:
 ├─────────────────────────────────────────────────────────┤
 │                      QUERY                              │
 │                                                         │
-│   User question ──► LLM reads wiki/ ──► Cited answer   │
+│   User question ──► LLM reads wiki/ ──► Cited answer    │
 │                                                         │
 │   (Valuable answers are filed back into the wiki)       │
 ├─────────────────────────────────────────────────────────┤
 │                      LINT                               │
 │                                                         │
-│   LLM audits wiki/ ──► Contradictions                  │
+│   LLM audits wiki/ ──► Contradictions                   │
 │                     ──► Orphan pages                    │
 │                     ──► Missing concepts                │
 │                     ──► Outdated claims                 │
