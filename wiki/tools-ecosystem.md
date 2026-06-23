@@ -4,7 +4,7 @@
 
 **Sources**: raw/tools.html
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-06-23
 
 ---
 
@@ -87,6 +87,14 @@
   - License: GNU General Public License, Version 3 or later
   - Compatibility: v. 2.0
 
+### Rust / WebAssembly
+
+- **JSON-stat Wasm** - WebAssembly port for working with JSON-stat, written in Rust (source: tools.html)
+  - Website: https://github.com/jsonstat/wasm
+  - Author: Xavier Badosa
+  - License: MIT License
+  - Compatibility: v. 2.0
+
 ## End User Tools
 
 ### Conversion Tools
@@ -100,6 +108,8 @@
 
 ### Viewing and Filtering Tools
 
+- **JSON-stat WebMCP Explorer** - Fetch any JSON-stat endpoint and browse its data through a web interface or natural language using a WebMCP-enabled browser (may require enabling experimental features in Chrome and installing a WebMCP extension) (source: tools.html)
+  - Website: https://jsonstat.com/webmcp/
 - **JSON-stat Subsetter** - Retrieve, view, filter, and save subsets of JSON-stat/CSV-stat/SDMX-JSON datasets (source: tools.html)
 - **JSON-stat Explorer** - View and filter JSON-stat queries or pasted JSON-stat content (source: tools.html)
 - **Idescat JSON-stat Viewer** - Fully interactive table viewer for dataset queries (source: tools.html)
