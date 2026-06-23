@@ -4,13 +4,13 @@
 
 **Sources**: raw/tools.html, raw/api.md
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-06-23
 
 ---
 
 ## Overview
 
-A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages (source: tools.html).
+A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, Python, Java, R, Julia, PHP, and Rust/WebAssembly (source: tools.html).
 
 ## JavaScript Libraries
 
@@ -114,6 +114,16 @@ Renders JSON-stat datasets as HTML tables (source: tools.html).
 - **Website**: https://github.com/lfiweb/jsonstat-phpviz
 - **Author**: Simon Speich
 - **License**: GNU General Public License, Version 3 or later
+- **Compatibility**: v. 2.0
+
+## Rust / WebAssembly Library
+
+### JSON-stat Wasm
+WebAssembly port for working with JSON-stat, written in Rust (source: tools.html).
+
+- **Website**: https://github.com/jsonstat/wasm
+- **Author**: Xavier Badosa
+- **License**: MIT License
 - **Compatibility**: v. 2.0
 
 ## Common Features
