@@ -4,7 +4,7 @@
 
 **Sources**: All source files in raw/
 
-**Last updated**: 2026-06-23
+**Last updated**: 2026-06-24
 
 ---
 
@@ -26,3 +26,5 @@
 - [[extensions]] - Extension mechanism for provider-specific properties
 - [[links]] - Link mechanism and IANA link relations
 - [[programming-libraries]] - Overview of programming language libraries for JSON-stat
+- [[schema]] - Official JSON Schema (2020-12) definitions and what they can/can't validate
+- [[sample-files]] - Canonical sample documents and the feature each illustrates
