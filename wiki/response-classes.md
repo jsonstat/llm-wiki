@@ -4,13 +4,13 @@
 
 **Sources**: raw/fullspec.html, raw/api.md
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-06-24
 
 ---
 
 ## Overview
 
-JSON-stat supports several classes of responses, each serving different purposes. The class is specified using the `class` property (source: fullspec.html).
+JSON-stat supports several classes of responses, each serving different purposes. The class is specified using the `class` property (source: fullspec.html). The required property set of each class is codified in the official [[schema]] (dataset requires `value`, `id`, `size`, `dimension`; collection requires `link`; dimension requires `category`).
 
 ## Dataset Class
 
@@ -139,3 +139,4 @@ For backward compatibility, properties id, size, and role were children of dimen
 - [[dataset-structure]]
 - [[dimensions]]
 - [[links]]
+- [[schema]]
