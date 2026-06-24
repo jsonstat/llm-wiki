@@ -4,7 +4,7 @@
 
 **Sources**: raw/fullspec.html
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-06-24
 
 ---
 
@@ -101,6 +101,10 @@ For metric role categories, unit can include:
 - **note** - Annotations (array of strings)
 - **error** - Error information (array of objects) (source: fullspec.html)
 
+## Validation
+
+The structural rules above are codified in official JSON Schema documents (JSON Schema 2020-12) — see [[schema]]. Any compliant validator can check a document's shape (per-class required properties, dense/sparse `value`, the three `status` forms, role keys, IANA link relations). JSON Schema cannot express cross-field cube invariants such as `value` length equaling the product of `size`; those require a semantic layer on top of the schema (source: fullspec.html).
+
 ## Related pages
 
 - [[jsonstat]]
@@ -111,3 +115,5 @@ For metric role categories, unit can include:
 - [[extensions]]
 - [[links]]
 - [[properties]]
+- [[schema]]
+- [[sample-files]]
