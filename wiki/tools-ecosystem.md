@@ -4,7 +4,7 @@
 
 **Sources**: raw/tools.html
 
-**Last updated**: 2026-06-23
+**Last updated**: 2026-06-24
 
 ---
 
@@ -120,6 +120,7 @@
 ### Validation Tools
 
 - **JSON-stat Validator** - Validate JSON-stat 2.0 documents or queries (source: tools.html)
+- **Official JSON Schemas** - JSON Schema 2020-12 definitions (general, dataset, collection, dimension) usable with any compliant validator; vendored in this repo's `raw/schema/` (see [[schema]])
 
 ### Specialized Tools
 
@@ -133,3 +134,5 @@
 - [[jsonstat]]
 - [[api-reference]]
 - [[programming-libraries]]
+- [[schema]]
+- [[sample-files]]
