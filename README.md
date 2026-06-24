@@ -56,6 +56,7 @@ Contains the original, **immutable** source documents. Nothing in this folder is
 | `fullspec.html` | JSON-stat 2.0 format specification |
 | `api.md` | JSON-stat JavaScript Toolkit API reference |
 | `tools.html` | Ecosystem of tools and libraries |
+| `schema/*.json` | Official JSON-stat 2.0 JSON Schemas (2020-12), vendored for local validation |
 
 To add new knowledge, drop a document here and ask the LLM to ingest it.
 
@@ -83,6 +84,7 @@ Key entry points:
 | `api-methods.md` | JavaScript Toolkit reading/traversal methods |
 | `programming-libraries.md` | Libraries across languages |
 | `tools-ecosystem.md` | Converters, explorers, and other tools |
+| `schema.md` | Official JSON Schemas and validation |
 
 ## How to install
 
