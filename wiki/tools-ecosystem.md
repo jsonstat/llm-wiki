@@ -121,6 +121,7 @@
 
 - **JSON-stat Validator** - Validate JSON-stat 2.0 documents or queries (source: tools.html)
 - **Official JSON Schemas** - JSON Schema 2020-12 definitions (general, dataset, collection, dimension) usable with any compliant validator; vendored in this repo's `raw/schema/` (see [[schema]])
+- **jsonstat-validator** - Semantic validator (polyglot TypeScript + Rust/Wasm) that adds the cross-field cube invariants the schemas cannot express, with a stable error-code vocabulary (see [[validator]])
 
 ### Specialized Tools
 

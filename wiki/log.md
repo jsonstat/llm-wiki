@@ -45,3 +45,16 @@
   - `wiki/index.md` — added `[[schema]]` and `[[sample-files]]` entries; bumped date
   - `README.md` — noted the vendored `raw/schema/` source and added a key entry point for the schema page
 - **Correction**: the wiki previously implied no machine-readable schema existed; the schemas are documented in `fullspec.html` and are now captured here
+
+## 2026-06-24 — jsonstat-validator package (Phase B implementation)
+
+- **Planned** the `jsonstat-validator` package end to end (Architect mode) → its [DESIGN.md](https://github.com/jsonstat/validator/blob/main/DESIGN.md). Decision: Option B — one declarative `rules-manifest.json` is the single source of truth for the code vocabulary; rule *logic* is hand-written in TypeScript and Rust; a shared `corpus/cases.json` enforces behavioural parity.
+- **Implemented** (now maintained in its own repository, [github.com/jsonstat/validator](https://github.com/jsonstat/validator)):
+  - **TypeScript (M1/M2)**: rule engine + manifest + ajv 2020-12 structural wrapper; all rules S1–S8, D1–D7, C1–C2; `corpus/cases.json` (valid + known-invalid); Node CLI. **27/27 tests pass**; CLI verified; `tsc` build clean.
+  - **Rust (M3)**: `crates/validator` (`jsonschema` crate for the structural pass; `default-features=false` since the schemas are self-contained). Full rule port; **corpus parity test passes** (both runtimes agree on all 20 cases).
+  - **Wasm (M4)**: `wasm.rs` behind the `wasm` feature; **builds to `wasm32-unknown-unknown`** (`RUSTFLAGS='--cfg getrandom_backend="wasm_js"'`).
+  - CI workflow (`.github/workflows/ci.yml`) and package `README.md`.
+- **Created page**: `wiki/validator.md`; cross-linked from `[[schema]]`, `[[tools-ecosystem]]`, `[[index]]`.
+- **Note**: the structural pass reuses the vendored 2020-12 schemas as-is (curated de-duplication deferred, design decision D1). JSON-stat's `updated` pattern uses `\-`, which ajv/the regex engine treat specially (ajv requires `unicodeRegExp:false`).
+- **Pending (M5)**: npm/crates.io publish, `curated/` de-duplicated schemas with a curated≡vendored parity test, cross-validation vs the web Format Validator.
+- **Repository split**: the implementation was extracted to its own repository, [github.com/jsonstat/validator](https://github.com/jsonstat/validator); the design doc moved to the project's `DESIGN.md` and `plans/` was removed from this wiki repo. This wiki references the package (see [[validator]]) and does not vendor the code.

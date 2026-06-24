@@ -1,0 +1,476 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "JSON-stat 2.0 Schema",
+	"$id": "https://json-stat.org/format/schema/2.0/",
+	"description": "This is version 1.05 of the JSON-stat 2.0 Schema (2025-06-13 19:12)",
+
+	"$defs": {
+		"strarray": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"uniqueItems": true
+		},
+
+		"version": {
+			"type": "string",
+			"enum": ["2.0"]
+		},
+		"updated": {
+			"oneOf": [
+				{ "type": "string", "format": "date-time" },
+				{ "type": "string", "pattern": "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$" }
+			]
+		},
+		"href": {
+			"type": "string",
+			"format": "uri"
+		},
+		"label": {
+			"type": "string"
+		},
+		"source": {
+			"type": "string"
+		},
+		"extension": {
+			"type": "object"
+		},
+		"error": {
+			"type": "array"
+		},
+		"note": { "$ref": "#/$defs/strarray" },
+
+		"category": {
+			"type": "object",
+			"properties": {
+				"index": {
+					"oneOf": [
+						{
+							"$ref": "#/$defs/strarray"
+						},
+						{
+							"type": "object",
+							"additionalProperties": {
+								"type": "number"
+							}
+						}
+					]
+				},
+				"label": {
+					"type": "object",
+          "minProperties": 1,
+					"additionalProperties": {
+						"type": "string"
+					}
+				},
+				"note": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/$defs/strarray"
+					}
+				},
+
+				"unit": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "object",
+						"properties": {
+							"label": {
+								"$ref": "#/$defs/label"
+							},
+							"decimals": {
+								"type": "integer"
+							},
+							"position": {
+								"type": "string",
+								"enum": ["start", "end"]
+							}
+						}
+					}
+				},
+
+				"coordinates": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "array",
+						"prefixItems": [
+							{ "type": "number" },
+							{ "type": "number" }
+						],
+						"items": false
+					}
+				},
+
+				"child": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/$defs/strarray"
+					}
+				}
+			},
+			"additionalProperties": false
+		},
+
+		"link": {
+			"type": "object",
+			"patternProperties": {
+				"^(about|alternate|appendix|archives|author|blocked-by|bookmark|canonical|chapter|collection|contents|copyright|create-form|current|derivedfrom|describedby|describes|disclosure|dns-prefetch|duplicate|edit|edit-form|edit-media|enclosure|first|glossary|help|hosts|hub|icon|index|item|last|latest-version|license|lrdd|memento|monitor|monitor-group|next|next-archive|nofollow|noreferrer|original|payment|pingback|preconnect|predecessor-version|prefetch|preload|prerender|prev|preview|previous|prev-archive|privacy-policy|profile|related|replies|search|section|self|service|start|stylesheet|subsection|successor-version|tag|terms-of-service|timegate|timemap|type|up|version-history|via|webmention|working-copy|working-copy-of)$": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"class": { "type": "string", "enum": ["dataset", "collection", "dimension"] },
+							"href": { "$ref": "#/$defs/href" },
+							"label": { "$ref": "#/$defs/label" },
+							"note": { "$ref": "#/$defs/note" },
+							"link": { "$ref": "#/$defs/link" },
+							"updated": { "$ref": "#/$defs/updated" },
+							"source": { "$ref": "#/$defs/source" },
+							"extension": { "$ref": "#/$defs/extension" },
+
+							"category": { "$ref": "#/$defs/category" },
+
+							"id": { "$ref": "#/$defs/strarray" },
+
+							"size": {
+								"type": "array",
+								"items": {
+									"type": "integer"
+								}
+							},
+
+							"role": {
+								"type": "object",
+								"properties": {
+									"time": { "$ref": "#/$defs/strarray" },
+									"geo": { "$ref": "#/$defs/strarray" },
+									"metric": { "$ref": "#/$defs/strarray" }
+								},
+								"additionalProperties": false
+							},
+
+							"dimension": {
+								"type": "object",
+								"additionalProperties": {
+									"type": "object",
+									"properties": {
+										"href": { "$ref": "#/$defs/href" },
+										"label": { "$ref": "#/$defs/label" },
+										"note": { "$ref": "#/$defs/note" },
+										"link": { "$ref": "#/$defs/link" },
+										"extension": { "$ref": "#/$defs/extension" },
+
+										"category": { "$ref": "#/$defs/category" }
+									},
+									"additionalProperties": false,
+									"required": [ "category" ]
+								}
+							},
+
+							"value": {
+								"oneOf": [
+									{
+										"type": "array",
+										"items": {
+											"anyOf": [
+												{ "type": "number" },
+												{ "type": "null" },
+												{ "type": "string" }
+											]
+										}
+									},
+									{
+										"type": "object",
+										"additionalProperties": {
+											"anyOf": [
+												{ "type": "number" },
+												{ "type": "null" },
+												{ "type": "string" }
+											]
+										}
+									}
+								]
+							},
+
+							"status": {
+								"oneOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "array",
+										"items": {
+											"type": ["string", "null"]
+										}
+									},
+									{
+										"type": "object",
+										"additionalProperties": {
+											"type": "string"
+										}
+									}
+								]
+							}
+						},
+						"additionalProperties": false
+					}
+				}
+			},
+			"additionalProperties": false
+		}
+	},
+
+	"oneOf": [
+		{
+			"type": "object",
+			"properties": {
+				"class": { "type": "string", "enum": ["dataset"] },
+
+				"version": { "$ref": "#/$defs/version" },
+				"href": { "$ref": "#/$defs/href" },
+				"label": { "$ref": "#/$defs/label" },
+				"note": { "$ref": "#/$defs/note" },
+				"link": { "$ref": "#/$defs/link" },
+				"updated": { "$ref": "#/$defs/updated" },
+				"source": { "$ref": "#/$defs/source" },
+				"error": { "$ref": "#/$defs/error" },
+				"extension": { "$ref": "#/$defs/extension" },
+
+				"id": { "$ref": "#/$defs/strarray" },
+
+				"size": {
+					"type": "array",
+					"items": {
+						"type": "integer"
+					}
+				},
+
+				"role": {
+					"type": "object",
+					"properties": {
+						"time": { "$ref": "#/$defs/strarray" },
+						"geo": { "$ref": "#/$defs/strarray" },
+						"metric": { "$ref": "#/$defs/strarray" }
+					},
+					"additionalProperties": false
+				},
+
+				"dimension": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "object",
+						"properties": {
+							"href": { "$ref": "#/$defs/href" },
+							"label": { "$ref": "#/$defs/label" },
+							"note": { "$ref": "#/$defs/note" },
+							"link": { "$ref": "#/$defs/link" },
+							"extension": { "$ref": "#/$defs/extension" },
+
+							"category": { "$ref": "#/$defs/category" }
+						},
+						"additionalProperties": false,
+						"required": [ "category" ]
+					}
+				},
+
+				"value": {
+					"oneOf": [
+						{
+							"type": "array",
+							"items": {
+								"anyOf": [
+									{ "type": "number" },
+									{ "type": "null" },
+									{ "type": "string" }
+								]
+							}
+						},
+						{
+							"type": "object",
+							"additionalProperties": {
+								"anyOf": [
+									{ "type": "number" },
+									{ "type": "null" },
+									{ "type": "string" }
+								]
+							}
+						}
+					]
+				},
+
+				"status": {
+					"oneOf": [
+						{
+							"type": "string"
+						},
+						{
+							"type": "array",
+							"items": {
+								"type": ["string", "null"]
+							}
+						},
+						{
+							"type": "object",
+							"additionalProperties": {
+								"type": "string"
+							}
+						}
+					]
+				}
+			},
+			"additionalProperties": false,
+			"required": [ "version", "class", "value", "id", "size", "dimension" ]
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": { "type": "string", "enum": ["dimension"] },
+
+				"version": { "$ref": "#/$defs/version" },
+				"href": { "$ref": "#/$defs/href" },
+				"label": { "$ref": "#/$defs/label" },
+				"note": { "$ref": "#/$defs/note" },
+				"link": { "$ref": "#/$defs/link" },
+				"updated": { "$ref": "#/$defs/updated" },
+				"source": { "$ref": "#/$defs/source" },
+				"error": { "$ref": "#/$defs/error" },
+				"extension": { "$ref": "#/$defs/extension" },
+
+				"category": { "$ref": "#/$defs/category" }
+			},
+			"additionalProperties": false,
+			"required": [ "version", "class", "category" ]
+		},
+		{
+			"type": "object",
+			"properties": {
+				"class": { "type": "string", "enum": ["collection"] },
+
+				"version": { "$ref": "#/$defs/version" },
+				"href": { "$ref": "#/$defs/href" },
+				"label": { "$ref": "#/$defs/label" },
+				"note": { "$ref": "#/$defs/note" },
+				"link": {
+					"type": "object",
+					"properties": {
+						"item": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"type": {
+										"type": "string"
+									},
+									"class": { "type": "string", "enum": ["dataset", "collection", "dimension"] },
+									"href": { "$ref": "#/$defs/href" },
+									"label": { "$ref": "#/$defs/label" },
+									"note": { "$ref": "#/$defs/note" },
+									"link": { "$ref": "#/$defs/link" },
+									"updated": { "$ref": "#/$defs/updated" },
+									"source": { "$ref": "#/$defs/source" },
+									"extension": { "$ref": "#/$defs/extension" },
+
+									"category": { "$ref": "#/$defs/category" },
+
+									"id": { "$ref": "#/$defs/strarray" },
+
+									"size": {
+										"type": "array",
+										"items": {
+											"type": "integer"
+										}
+									},
+
+									"role": {
+										"type": "object",
+										"properties": {
+											"time": { "$ref": "#/$defs/strarray" },
+											"geo": { "$ref": "#/$defs/strarray" },
+											"metric": { "$ref": "#/$defs/strarray" }
+										},
+										"additionalProperties": false
+									},
+
+									"dimension": {
+										"type": "object",
+										"additionalProperties": {
+											"type": "object",
+											"properties": {
+												"href": { "$ref": "#/$defs/href" },
+												"label": { "$ref": "#/$defs/label" },
+												"note": { "$ref": "#/$defs/note" },
+												"link": { "$ref": "#/$defs/link" },
+												"extension": { "$ref": "#/$defs/extension" },
+
+												"category": { "$ref": "#/$defs/category" }
+											},
+											"additionalProperties": false,
+											"required": [ "category" ]
+										}
+									},
+
+									"value": {
+										"oneOf": [
+											{
+												"type": "array",
+												"items": {
+													"anyOf": [
+														{ "type": "number" },
+														{ "type": "null" },
+														{ "type": "string" }
+													]
+												}
+											},
+											{
+												"type": "object",
+												"additionalProperties": {
+													"anyOf": [
+														{ "type": "number" },
+														{ "type": "null" },
+														{ "type": "string" }
+													]
+												}
+											}
+										]
+									},
+
+									"status": {
+										"oneOf": [
+											{
+												"type": "string"
+											},
+											{
+												"type": "array",
+												"items": {
+													"type": ["string", "null"]
+												}
+											},
+											{
+												"type": "object",
+												"additionalProperties": {
+													"type": "string"
+												}
+											}
+										]
+									}
+								},
+								"additionalProperties": false
+							}
+						}
+					},
+					"additionalProperties": false
+				},
+				"updated": { "$ref": "#/$defs/updated" },
+				"source": { "$ref": "#/$defs/source" },
+				"error": { "$ref": "#/$defs/error" },
+				"extension": { "$ref": "#/$defs/extension" }
+			},
+			"additionalProperties": false,
+			"required": [ "version", "class", "link" ]
+		}
+	]
+}

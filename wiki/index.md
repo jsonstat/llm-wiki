@@ -28,3 +28,4 @@
 - [[programming-libraries]] - Overview of programming language libraries for JSON-stat
 - [[schema]] - Official JSON Schema (2020-12) definitions and what they can/can't validate
 - [[sample-files]] - Canonical sample documents and the feature each illustrates
+- [[validator]] - jsonstat-validator: semantic validation layer (cross-field cube invariants) with a stable error-code vocabulary

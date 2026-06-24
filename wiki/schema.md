@@ -98,7 +98,7 @@ Because the schemas are standard **2020-12**, you can validate with any complian
 Potential improvements to consider (the schemas are vendored locally in `raw/schema/` precisely to support this):
 
 1. **De-duplicate shared `$defs`** via `$ref` to a common module, so a single edit propagates to all classes.
-2. **Add a semantic profile** (custom keywords or a companion rules document) for the cross-field invariants above.
+2. **Add a semantic profile** for the cross-field invariants above — now realized as the [[validator]] package (`jsonstat-validator`), a polyglot (TypeScript + Rust/Wasm) semantic validator that layers on top of these schemas.
 3. **Standardize `$id`/versioning** and publish to a schema registry for better tooling discovery.
 
 ## Related pages
@@ -112,3 +112,4 @@ Potential improvements to consider (the schemas are vendored locally in `raw/sch
 - [[links]]
 - [[tools-ecosystem]]
 - [[sample-files]]
+- [[validator]]
