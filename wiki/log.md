@@ -4,7 +4,7 @@
 
 **Sources**: SKILLS.md
 
-**Last updated**: 2026-06-24
+**Last updated**: 2026-07-05
 
 ---
 
@@ -58,3 +58,16 @@
 - **Note**: the structural pass reuses the vendored 2020-12 schemas as-is (curated de-duplication deferred, design decision D1). JSON-stat's `updated` pattern uses `\-`, which ajv/the regex engine treat specially (ajv requires `unicodeRegExp:false`).
 - **Pending (M5)**: npm/crates.io publish, `curated/` de-duplicated schemas with a curated≡vendored parity test, cross-validation vs the web Format Validator.
 - **Repository split**: the implementation was extracted to its own repository, [github.com/jsonstat/validator](https://github.com/jsonstat/validator); the design doc moved to the project's `DESIGN.md` and `plans/` was removed from this wiki repo. This wiki references the package (see [[validator]]) and does not vendor the code.
+
+## 2026-07-05
+
+- **Re-ingested raw/tools.html** (new version; source footer "Last update: 2026-07-05")
+- **Added new entries**:
+  - **JSON-stat builder** (`jsonstat.com/builder/`) — a browser-based authoring tool that creates valid JSON-stat datasets interactively via a step-by-step wizard: define dimensions, categories, and roles to model a statistical cube, then feed it numbers from a spreadsheet, a CSV, a tidy one-row-per-observation format, or by hand; output is checked with the official, fully-offline JSON-stat tooling. Introduces a new "Authoring Tools" category under End User Tools.
+  - **jsonstat-validator** — now appears in the source as a programming library (polyglot TypeScript + Rust/Wasm). This is the *developer tool* (the package behind the web app); it must not be confused with the end-user **JSON-stat Validator** web app at `/format/validator/`, which uses this package under the hood.
+- **Updated pages**:
+  - `wiki/tools-ecosystem.md` — added jsonstat-validator under Programming Libraries (new "TypeScript / Rust / WebAssembly" subsection); added the "Authoring Tools" subsection with the JSON-stat builder; clarified in "Validation Tools" that the JSON-stat Validator *web app* is powered by jsonstat-validator under the hood (removed the duplicate dev-tool bullet there); added `[[validator]]` to Related pages; bumped date.
+  - `wiki/programming-libraries.md` — added a "TypeScript / Rust / WebAssembly Library" section for jsonstat-validator; expanded the overview to name TypeScript and the validator; added `[[validator]]` to Related pages; bumped date.
+  - `wiki/index.md` — bumped date (no new pages created; existing entries remain accurate).
+- **Omitted**: the self-referential "JSON-stat LLM Wiki" end-user entry, per curator decision (consistent with 2026-06-23).
+- **No changes** to the other 13 programming libraries or the remaining end-user tools — their metadata is unchanged versus the 2026-06-23 version.

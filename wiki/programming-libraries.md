@@ -4,13 +4,13 @@
 
 **Sources**: raw/tools.html, raw/api.md
 
-**Last updated**: 2026-06-23
+**Last updated**: 2026-07-05
 
 ---
 
 ## Overview
 
-A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, Python, Java, R, Julia, PHP, and Rust/WebAssembly (source: tools.html).
+A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, TypeScript, Python, Java, R, Julia, PHP, and Rust/WebAssembly (source: tools.html). It also includes a dedicated semantic validator, jsonstat-validator (see [[validator]]).
 
 ## JavaScript Libraries
 
@@ -126,6 +126,21 @@ WebAssembly port for working with JSON-stat, written in Rust (source: tools.html
 - **License**: MIT License
 - **Compatibility**: v. 2.0
 
+## TypeScript / Rust / WebAssembly Library
+
+### jsonstat-validator
+Polyglot (TypeScript + Rust/WebAssembly) semantic validator for JSON-stat v. 2.0 (source: tools.html). It layers the cross-field cube invariants on top of the official [[schema|JSON Schema 2020-12]] definitions and exposes a stable, versioned error-code vocabulary. It is the *developer tool* that powers the end-user **JSON-stat Validator** web app — the two should not be confused.
+
+- **Website**: https://github.com/jsonstat/validator
+- **Author**: Xavier Badosa
+- **License**: Apache License, Version 2.0
+- **Compatibility**: v. 2.0
+- **Features**:
+  - Structural pass reusing the vendored 2020-12 schemas (via `ajv` / the `jsonschema` crate)
+  - Semantic rules covering size/value counts, dimension/category consistency, roles, status, links, hierarchies, etc.
+  - Available as a TypeScript package, a Rust crate, and WebAssembly
+  - See [[validator]] for the full rule and error-code reference
+
 ## Common Features
 
 Most libraries provide:
@@ -139,3 +154,4 @@ Most libraries provide:
 - [[tools-ecosystem]]
 - [[api-reference]]
 - [[jsonstat]]
+- [[validator]]

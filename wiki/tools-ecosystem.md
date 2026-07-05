@@ -4,7 +4,7 @@
 
 **Sources**: raw/tools.html
 
-**Last updated**: 2026-06-24
+**Last updated**: 2026-07-05
 
 ---
 
@@ -95,7 +95,20 @@
   - License: MIT License
   - Compatibility: v. 2.0
 
+### TypeScript / Rust / WebAssembly
+
+- **jsonstat-validator** - Semantic validator library (polyglot TypeScript + Rust/Wasm) that enforces the cross-field cube invariants the [[schema|JSON Schemas]] cannot express, with a stable, versioned error-code vocabulary. It is the *developer tool*; do not confuse it with the end-user **JSON-stat Validator** web app at `/format/validator/`, which uses this package under the hood (see [[validator]]) (source: tools.html)
+  - Website: https://github.com/jsonstat/validator
+  - Author: Xavier Badosa
+  - License: Apache License, Version 2.0
+  - Compatibility: v. 2.0
+
 ## End User Tools
+
+### Authoring Tools
+
+- **JSON-stat builder** - Browser-based tool for creating JSON-stat datasets interactively. Instead of hand-writing the verbose, error-prone JSON-stat format, you describe your data through a step-by-step wizard — defining dimensions, categories, and roles to model a proper statistical cube, then feeding it numbers from a spreadsheet, a CSV, a tidy one-row-per-observation format, or by hand — and get back a valid, ready-to-publish dataset document to copy or download. Each result is checked with the official, fully-offline JSON-stat tooling, so exports are guaranteed valid (source: tools.html)
+  - Website: https://jsonstat.com/builder/
 
 ### Conversion Tools
 
@@ -119,9 +132,8 @@
 
 ### Validation Tools
 
-- **JSON-stat Validator** - Validate JSON-stat 2.0 documents or queries (source: tools.html)
+- **JSON-stat Validator** - End-user web app to validate JSON-stat 2.0 documents or queries. It is powered by the jsonstat-validator developer tool under the hood (see Programming Libraries above and [[validator]]) (source: tools.html)
 - **Official JSON Schemas** - JSON Schema 2020-12 definitions (general, dataset, collection, dimension) usable with any compliant validator; vendored in this repo's `raw/schema/` (see [[schema]])
-- **jsonstat-validator** - Semantic validator (polyglot TypeScript + Rust/Wasm) that adds the cross-field cube invariants the schemas cannot express, with a stable error-code vocabulary (see [[validator]])
 
 ### Specialized Tools
 
@@ -136,4 +148,5 @@
 - [[api-reference]]
 - [[programming-libraries]]
 - [[schema]]
+- [[validator]]
 - [[sample-files]]
