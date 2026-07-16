@@ -4,7 +4,7 @@
 
 **Sources**: raw/tools.html
 
-**Last updated**: 2026-07-05
+**Last updated**: 2026-07-16
 
 ---
 
@@ -103,6 +103,15 @@
   - License: Apache License, Version 2.0
   - Compatibility: v. 2.0
 
+### Multi-Format Interop
+
+- **jsonstat-io** - Interop/conversion library that bridges JSON-stat v. 2.0 to and from modern analytics and open-data formats. It is the *developer library* counterpart to the end-user [[#Conversion Tools]] below; for a fuller description see [[programming-libraries]] (source: tools.html)
+  - Website: https://github.com/jsonstat/io
+  - Author: Xavier Badosa
+  - License: Apache License, Version 2.0
+  - Compatibility: v. 2.0
+  - Formats: Apache Arrow, Parquet, DuckDB, Polars, CSV, CSV-stat, Frictionless Data Package, CSVW
+
 ## End User Tools
 
 ### Authoring Tools
@@ -111,6 +120,8 @@
   - Website: https://jsonstat.com/builder/
 
 ### Conversion Tools
+
+End-user (browser/CLI) conversion tools. For programmatic conversion to columnar and open-data formats (Arrow, Parquet, DuckDB, Polars, CSV-stat, Frictionless Data Package, CSVW), see the **jsonstat-io** library under Programming Libraries above and [[programming-libraries]].
 
 - **From JSON-stat API to JSON/CSV API** - Converts dataset API URLs to JSON or CSV format (source: tools.html)
 - **From JSON-stat dataset to Excel** - Downloads dataset information as Excel file (source: tools.html)

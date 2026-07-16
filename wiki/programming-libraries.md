@@ -4,13 +4,13 @@
 
 **Sources**: raw/tools.html, raw/api.md
 
-**Last updated**: 2026-07-05
+**Last updated**: 2026-07-16
 
 ---
 
 ## Overview
 
-A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, TypeScript, Python, Java, R, Julia, PHP, and Rust/WebAssembly (source: tools.html). It also includes a dedicated semantic validator, jsonstat-validator (see [[validator]]).
+A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, TypeScript, Python, Java, R, Julia, PHP, and Rust/WebAssembly (source: tools.html). It also includes a dedicated semantic validator, jsonstat-validator (see [[validator]]), and a multi-format interop library, jsonstat-io, that bridges JSON-stat to columnar/spreadsheet formats like Apache Arrow, Parquet, DuckDB, Polars, and CSV-stat (see below).
 
 ## JavaScript Libraries
 
@@ -140,6 +140,25 @@ Polyglot (TypeScript + Rust/WebAssembly) semantic validator for JSON-stat v. 2.0
   - Semantic rules covering size/value counts, dimension/category consistency, roles, status, links, hierarchies, etc.
   - Available as a TypeScript package, a Rust crate, and WebAssembly
   - See [[validator]] for the full rule and error-code reference
+
+## Multi-Format Interop Library
+
+### jsonstat-io
+Polyglot interop/conversion library that bridges JSON-stat v. 2.0 to and from modern analytics and open-data formats (source: tools.html). Rather than parsing JSON-stat into native objects, jsonstat-io translates a JSON-stat dataset into a columnar or tabular representation for use in analytical engines and pipelines, and vice versa. It complements the standalone end-user [[tools-ecosystem|Conversion Tools]] (CSV Exporter/Importer, Excel exporter, command-line conversion, etc.), which are browser/CLI tools rather than a programmable library.
+
+- **Website**: https://github.com/jsonstat/io
+- **Author**: Xavier Badosa
+- **License**: Apache License, Version 2.0
+- **Compatibility**: v. 2.0
+- **Supported formats**:
+  - Apache Arrow
+  - Parquet
+  - DuckDB
+  - Polars
+  - CSV
+  - CSV-stat
+  - Frictionless Data Package
+  - CSVW
 
 ## Common Features
 

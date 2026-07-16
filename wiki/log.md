@@ -4,7 +4,7 @@
 
 **Sources**: SKILLS.md
 
-**Last updated**: 2026-07-05
+**Last updated**: 2026-07-16
 
 ---
 
@@ -71,3 +71,14 @@
   - `wiki/index.md` — bumped date (no new pages created; existing entries remain accurate).
 - **Omitted**: the self-referential "JSON-stat LLM Wiki" end-user entry, per curator decision (consistent with 2026-06-23).
 - **No changes** to the other 13 programming libraries or the remaining end-user tools — their metadata is unchanged versus the 2026-06-23 version.
+
+## 2026-07-16
+
+- **Re-ingested raw/tools.html** (delta-only ingestion; source footer "Last update: 2026-07-05" unchanged since the 2026-07-05 pass, but the wiki had not yet captured one entry).
+- **Added new entry**:
+  - **jsonstat-io** (`https://github.com/jsonstat/io`) — a multi-format interop/conversion library (by Xavier Badosa; Apache 2.0; v. 2.0) that bridges JSON-stat v. 2.0 to and from Apache Arrow, Parquet, DuckDB, Polars, CSV, CSV-stat, Frictionless Data Package, and CSVW. It sits in the source's left column (Programming Libraries), immediately after jsonstat-validator. It is the *developer library* counterpart to the end-user browser/CLI Conversion Tools.
+- **Updated pages**:
+  - `wiki/programming-libraries.md` — added a new "Multi-Format Interop Library" section for jsonstat-io (after the TypeScript/Rust/Wasm validator section); expanded the overview paragraph to mention it; bumped date.
+  - `wiki/tools-ecosystem.md` — added a "Multi-Format Interop" subsection under Programming Libraries (jsonstat-validator → jsonstat-io, mirroring the source order); added a cross-reference at the top of "Conversion Tools" pointing to jsonstat-io for programmatic/columnar conversion; bumped date.
+  - `wiki/index.md` — bumped date (no new pages created; `[[programming-libraries]]` and `[[tools-ecosystem]]` entries remain accurate).
+- **No changes** to the other 14 programming libraries or the end-user tools — their metadata is unchanged versus the 2026-07-05 version. The commented-out CLI block in the source remains omitted, and the self-referential "JSON-stat LLM Wiki" end-user entry continues to be omitted per prior curator decisions.
