@@ -4,7 +4,7 @@
 
 **Sources**: SKILLS.md
 
-**Last updated**: 2026-07-16
+**Last updated**: 2026-07-18
 
 ---
 
@@ -82,3 +82,14 @@
   - `wiki/tools-ecosystem.md` — added a "Multi-Format Interop" subsection under Programming Libraries (jsonstat-validator → jsonstat-io, mirroring the source order); added a cross-reference at the top of "Conversion Tools" pointing to jsonstat-io for programmatic/columnar conversion; bumped date.
   - `wiki/index.md` — bumped date (no new pages created; `[[programming-libraries]]` and `[[tools-ecosystem]]` entries remain accurate).
 - **No changes** to the other 14 programming libraries or the end-user tools — their metadata is unchanged versus the 2026-07-05 version. The commented-out CLI block in the source remains omitted, and the self-referential "JSON-stat LLM Wiki" end-user entry continues to be omitted per prior curator decisions.
+
+## 2026-07-18
+
+- **Re-ingested raw/tools.html** (source footer corrected by the curator to "Last update: 2026-07-18"; content otherwise unchanged versus the 2026-07-05 version already captured by the wiki).
+- **Added two end-user entries** that had previously been omitted/overlooked:
+  - **From CSV-stat to Excel** (`https://github.com/jsonstat/csv#importing-csv-stat-into-excel`) — imports any CSV-stat into an Excel Workbook using a set of Power Query (M) queries. A genuine gap overlooked in every prior pass (it sits in the source between "From JSON-stat dataset to Excel" and "JSON-stat Subsetter"). Added under Conversion Tools.
+  - **JSON-stat LLM Wiki** (`https://github.com/jsonstat/llm-wiki`) — the structured, LLM-maintained knowledge base about JSON-stat. This is the **self-referential** entry: it describes this very wiki. Added under a new "Knowledge Base" subsection of End User Tools, reversing the prior curator decisions (2026-06-23, 2026-07-05) to omit it; the entry links to [[index]].
+- **Updated pages**:
+  - `wiki/tools-ecosystem.md` — added "From CSV-stat to Excel" under Conversion Tools; added a new "Knowledge Base" subsection with the JSON-stat LLM Wiki (self-reference → [[index]]); bumped date to 2026-07-18.
+  - `wiki/index.md` — bumped date to 2026-07-18 (no new pages created; the `[[tools-ecosystem]]` entry description remains accurate).
+- **No changes** to `wiki/programming-libraries.md` (the 14 programming libraries and jsonstat-io are unchanged) or to the other end-user tools.

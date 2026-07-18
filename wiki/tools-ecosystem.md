@@ -4,7 +4,7 @@
 
 **Sources**: raw/tools.html
 
-**Last updated**: 2026-07-16
+**Last updated**: 2026-07-18
 
 ---
 
@@ -125,6 +125,8 @@ End-user (browser/CLI) conversion tools. For programmatic conversion to columnar
 
 - **From JSON-stat API to JSON/CSV API** - Converts dataset API URLs to JSON or CSV format (source: tools.html)
 - **From JSON-stat dataset to Excel** - Downloads dataset information as Excel file (source: tools.html)
+- **From CSV-stat to Excel** - Imports a CSV-stat into an Excel Workbook using a set of Power Query (M) queries (source: tools.html)
+  - Website: https://github.com/jsonstat/csv#importing-csv-stat-into-excel
 - **JSON-stat CSV Exporter** - Converts local JSON-stat dataset to CSV (source: tools.html)
 - **JSON-stat CSV Batch Exporter** - Batch converts multiple datasets to CSV (source: tools.html)
 - **JSON-stat CSV Importer** - Converts CSV to JSON-stat (source: tools.html)
@@ -152,6 +154,11 @@ End-user (browser/CLI) conversion tools. For programmatic conversion to columnar
 - **JSON-stat Web Data Connector for Tableau** - Import datasets into Tableau (source: tools.html)
 - **Power BI custom connector** - Import datasets into Power BI (source: tools.html)
 - **Free Power Query (M) generator** - Generate Power Query scripts for PowerBI/Excel from PXWeb API (source: tools.html)
+
+### Knowledge Base
+
+- **JSON-stat LLM Wiki** - A structured, LLM-maintained knowledge base about the JSON-stat format, built following Andrej Karpathy's *LLM Wiki* pattern. Raw sources (the 2.0 specification, the JavaScript Toolkit API reference, and the tools ecosystem) are pre-processed by an LLM into an interlinked Markdown wiki that compounds over time. This is the **self-referential** entry: it describes this very wiki. Open the repository with an AI coding assistant (or paste the contents of `SKILLS.md` into a chat LLM) and ask questions or request new sources to be ingested (see [[index]]) (source: tools.html)
+  - Website: https://github.com/jsonstat/llm-wiki
 
 ## Related pages
 
