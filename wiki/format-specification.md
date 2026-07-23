@@ -4,7 +4,7 @@
 
 **Sources**: raw/fullspec.html
 
-**Last updated**: 2026-06-24
+**Last updated**: 2026-07-23
 
 ---
 
@@ -60,9 +60,11 @@ Required property containing data sorted according to dataset dimensions (source
 
 ### status
 Optional property for observation-level metadata (source: fullspec.html):
-- Array of same size as value assigns status by position
-- String assigns same status to all data
+- Array of the same length as `value` assigns status by position
+- String assigns the same status to all data (recommended form for uniform status)
 - Object provides status for specific cells
+
+> **Deprecated:** Assigning a single uniform status via an array of size 1 is deprecated and may result in validation errors; use the string form instead.
 
 ## Dimension Structure
 

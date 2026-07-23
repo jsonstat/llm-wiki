@@ -4,7 +4,7 @@
 
 **Sources**: SKILLS.md
 
-**Last updated**: 2026-07-18
+**Last updated**: 2026-07-23
 
 ---
 
@@ -93,3 +93,52 @@
   - `wiki/tools-ecosystem.md` — added "From CSV-stat to Excel" under Conversion Tools; added a new "Knowledge Base" subsection with the JSON-stat LLM Wiki (self-reference → [[index]]); bumped date to 2026-07-18.
   - `wiki/index.md` — bumped date to 2026-07-18 (no new pages created; the `[[tools-ecosystem]]` entry description remains accurate).
 - **No changes** to `wiki/programming-libraries.md` (the 14 programming libraries and jsonstat-io are unchanged) or to the other end-user tools.
+
+## 2026-07-23
+
+- **Re-ingested raw/tools.html** (new version; source footer "Last update: 2026-07-23").
+- **Added new entry**:
+  - **JSON-stat Go** (`https://github.com/jsonstat/go`) — a Go library for working with JSON-stat (by Xavier Badosa; Apache 2.0; v. 2.0). It sits in the source's left column between JSON-stat Wasm and the JavaScript Utilities Suite but had not been captured by any prior pass, introducing a new Go language category. With this addition the wiki now covers all 15 active programming libraries in the source.
+- **Updated pages**:
+  - `wiki/programming-libraries.md` — added a new "Go Library" section (after the Rust/WebAssembly Library, mirroring the source column order); expanded the overview to list Go; bumped date to 2026-07-23.
+  - `wiki/tools-ecosystem.md` — added a "Go" subsection under Programming Libraries (after Rust/WebAssembly); bumped date to 2026-07-23.
+  - `wiki/index.md` — bumped date to 2026-07-23 (no new pages created; existing entries remain accurate).
+- **No changes** to the other 14 programming libraries or the 21 end-user tools — their metadata is unchanged versus the 2026-07-18 version. The commented-out CLI block in the source remains omitted.
+
+## 2026-07-23 — Lint
+
+- **Scope**: Full lint pass over all 16 content pages (+ `index.md`, `log.md`) against `raw/` sources (`fullspec.html` 2024-05-24, `api.md`, `tools.html` 2026-07-23, `raw/schema/*`). Per `SKILLS.md` "Lint": checked contradictions, orphan pages, missing concept pages, outdated claims, and page-format compliance.
+- **Findings** (numbered, with suggested fixes):
+  1. **[Contradiction — high] `api-methods.md` → `Dimension()` `instance` parameter is internally contradictory and wrong.** Line 72 states "*when true, returns category labels array*" while line 77 states "Array of category labels when *instance is false*." The two lines give opposite truth values, and both conflict with `api.md`. The source's prose (api.md L258) is itself garbled ("When a valid dimid is specified in combination with instance *true*, the return value is an array of category labels") but its example (L263, `j.Dimension("area", false)`) proves labels are returned when `instance` is **false**; `instance` defaults to **true** (return a jsonstat instance/object). *Fix*: rewrite the `Dimension()` block so the parameter reads "`instance` (optional, default `true`): when `false`, returns an array of category label strings instead of a jsonstat instance" and the Returns list reads "Array of category-label strings when `instance` is `false`". Note: the underlying typo is in the immutable `raw/api.md`, so this wiki page should document the *intended* (example-backed) behaviour rather than copy the prose typo.
+  2. **[Misattribution — low] `dimensions.md` → "classification" role cited to `fullspec.html`.** The "classification" role originates in the JavaScript Toolkit (`api.md` L248, the `{ role: "classification" }` filter), not the format spec; `fullspec.html`'s `role` section only defines `time`, `geo`, and `metric` as role keys. *Fix*: change the source tag on the "classification Role" subsection (L82–83) from `(source: fullspec.html)` to `(source: api.md)`.
+  3. **[Stale — low] 9 pages remain dated `2026-05-20`** (initial creation): `jsonstat.md`, `api-methods.md`, `api-reference.md`, `dataset-structure.md`, `dimensions.md`, `properties.md`, `sparse-cubes.md`, `extensions.md`, `links.md`. No concrete factual drift versus current sources was detected beyond finding #1 (the sources they cite have not been re-versioned), but a refresh pass is recommended whenever these are next edited — especially `api-methods.md`, which must be corrected per finding #1 and should have its date bumped then.
+- **No issues found** in the following dimensions:
+  - **Orphan pages**: none. All 16 content pages receive at least one inbound `[[link]]` from another page (verified via full link-map).
+  - **Missing concept pages**: none required. Concepts without a dedicated page (`bundle`, `status`, `unit`, `coordinates`, `hierarchy`, `classification`, `constant dimension`) are each covered as subsections of existing pages (`response-classes.md`, `dataset-structure.md`, `dimensions.md`), which matches the wiki's chosen granularity.
+  - **Page-format compliance**: all 16 content pages have the required `# Title`, `**Summary**`, `**Sources**`, `**Last updated**`, `---` separator, and `## Related pages` block. `index.md` and `log.md` omit `## Related pages` by design (they are the table of contents and append-only log respectively) — not a violation.
+  - **Source/footer accuracy**: wiki/log.md date claims for `fullspec.html` (2024-05-24) and `tools.html` (2026-07-23) match the actual source footers.
+- **No files modified** in this pass (lint reports only; fixes are suggested for a follow-up edit pass). Bumped `log.md` date is implicit in this entry's heading.
+
+## 2026-07-23 — Lint fixes (curator follow-up)
+
+- Applied the fixes from the lint pass above, plus an additional deprecation surfaced during review.
+- **Fix 1 — `Dimension().instance` contradiction.**
+  - `raw/api.md` — corrected the source typo in the `instance` parameter description ("in combination with **instance** *true*" → "*false*"), so the prose now matches its own example (`j.Dimension("area", false)` returns labels).
+  - `wiki/api-methods.md` — rewrote the `Dimension()` block so the parameter reads "`instance` (optional, default `true`): when `false`, returns an array of category-label strings instead of a jsonstat instance" and the Returns list lists the label-array outcome only under `instance === false`. Removed the self-contradicting lines (old L72 vs L77). Bumped date to 2026-07-23.
+- **Fix 2 — "classification" is not a JSON-stat format role.** `wiki/dimensions.md` — replaced the misleading "classification Role" subsection (mis-cited to `fullspec.html`) with a "Dimensions Without a Role" subsection clarifying that the format defines only `time`, `geo`, `metric`; any other dimension is simply unroled. The string `"classification"` is documented as a **JavaScript Toolkit convention only** (used by `Dimension().role` for unroled dimensions, per `api.md`), not a value that appears in the on-the-wire `role` object. Bumped date to 2026-07-23.
+- **Fix 4 — `status` array-of-size-1 is deprecated.** Curator note: assigning a single uniform status via an array of size 1 (e.g. `"status": ["e"]`) is deprecated; the string form (`"status": "e"`) must be used for this case.
+  - `wiki/dataset-structure.md` — clarified that the array form is "one entry per value" (same length as `value`), marked the string form as the recommended uniform-status form, and added a deprecation note for the size-1 array. Bumped date to 2026-07-23.
+  - `wiki/format-specification.md` — aligned the `status` bullet list (array same length as `value`, string recommended for uniform status, object for specific cells) and added the matching deprecation note. Bumped date to 2026-07-23.
+- **No changes** to the remaining 8 of the 9 originally-stale pages (`jsonstat.md`, `api-reference.md`, `properties.md`, `sparse-cubes.md`, `extensions.md`, `links.md`, and the unaffected `index.md`/`log.md`); only the four pages touched by fixes 1/2/4 were re-dated.
+
+## 2026-07-23 — Re-ingest api.md and fullspec.html (curator typo/explanation fixes)
+
+- **Re-ingested `raw/api.md` and `raw/fullspec.html`** (curator updates: a typo correction and an improved explanation). Per the curator's note, the changes are already coherent with the wiki's content; this pass verified that and captured the one new substantive nuance.
+- **`raw/api.md`** — The `Dimension()` `instance` parameter description (L258) now reads "in combination with **instance** *false*" (returning an array of category labels). This is exactly the typo the wiki flagged in the 2026-07-23 Lint (finding #1) and that the curator had already corrected in `raw/api.md` as part of "Lint fixes, Fix 1". The wiki's `Dimension()` documentation (`api-methods.md`) already describes the corrected, example-backed behaviour — no wiki change required.
+- **`raw/fullspec.html`** — Footer "Last update" is now **2026-07-04** (the 2026-07-23 Lint had recorded 2024-05-24; the source has since been re-versioned). The `status` section (L436) now states that the single-element-array form "is deprecated and **may result in validation errors**" — a consequence not previously captured in the wiki's deprecation notes.
+- **Updated pages** (status deprecation nuance — "may result in validation errors"):
+  - `wiki/dataset-structure.md` — extended the deprecation blockquote (L98) to note the size-1 array form may result in validation errors; dates already 2026-07-23.
+  - `wiki/format-specification.md` — extended the deprecation blockquote (L67) likewise; date already 2026-07-23.
+- **Coherence scan**: all 16 content pages citing `api.md`/`fullspec.html` were checked against the updated sources — no contradictions found (Dimension `instance` behaviour, value ordering/row-major, the three `status` forms, role keys `time`/`geo`/`metric`, link/unit/note sections, embedded responses). The wiki's "classification is a Toolkit convention only" note (`dimensions.md`) remains consistent with both sources.
+- **Source-footer accuracy correction**: `log.md` now records `fullspec.html` as 2026-07-04 (was 2024-05-24 in the 2026-07-23 Lint entry); the lint's source/footer-accuracy claim had gone stale.
+- **No changes** to `index.md` (no new pages created; existing entries remain accurate).

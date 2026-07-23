@@ -4,7 +4,7 @@
 
 **Sources**: raw/fullspec.html, raw/api.md
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-07-23
 
 ---
 
@@ -72,17 +72,17 @@ Values follow "row-major order" - "What does not change, first" criterion. The l
 Observation-level metadata (source: fullspec.html).
 
 - Type: Array, string, or object
-- Array: Assigns status to each value by position
-- String: Assigns same status to all values
+- Array (same length as `value`): Assigns status to each value by position
+- String: Assigns the same status to all values (this is the recommended form for uniform status)
 - Object: Provides status for specific cells
 
-**Array form**:
+**Array form** (one entry per value):
 ```json
 "value": [100, null, 102, 103, 104],
 "status": ["a", "m", "a", "a", "p"]
 ```
 
-**String form** (recommended for uniform status):
+**String form** (uniform status — the recommended way to assign the same status to all values):
 ```json
 "value": [100, 99, 102, 103, 104],
 "status": "e"
@@ -94,6 +94,8 @@ Observation-level metadata (source: fullspec.html).
 "status": { "1": "m" }
 ```
 (source: fullspec.html)
+
+> **Deprecated:** Assigning a single uniform status via an array of size 1 (e.g. `"status": ["e"]`) is deprecated and may result in validation errors. Use the string form (`"status": "e"`) instead.
 
 Note: Status does not have a standard meaning or vocabulary - it's up to the provider (source: fullspec.html).
 

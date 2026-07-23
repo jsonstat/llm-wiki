@@ -4,13 +4,13 @@
 
 **Sources**: raw/tools.html, raw/api.md
 
-**Last updated**: 2026-07-16
+**Last updated**: 2026-07-23
 
 ---
 
 ## Overview
 
-A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, TypeScript, Python, Java, R, Julia, PHP, and Rust/WebAssembly (source: tools.html). It also includes a dedicated semantic validator, jsonstat-validator (see [[validator]]), and a multi-format interop library, jsonstat-io, that bridges JSON-stat to columnar/spreadsheet formats like Apache Arrow, Parquet, DuckDB, Polars, and CSV-stat (see below).
+A rich ecosystem of programming libraries exists for working with [[jsonstat]] across multiple programming languages — including JavaScript, TypeScript, Python, Java, R, Julia, PHP, Rust/WebAssembly, and Go (source: tools.html). It also includes a dedicated semantic validator, jsonstat-validator (see [[validator]]), and a multi-format interop library, jsonstat-io, that bridges JSON-stat to columnar/spreadsheet formats like Apache Arrow, Parquet, DuckDB, Polars, and CSV-stat (see below).
 
 ## JavaScript Libraries
 
@@ -124,6 +124,16 @@ WebAssembly port for working with JSON-stat, written in Rust (source: tools.html
 - **Website**: https://github.com/jsonstat/wasm
 - **Author**: Xavier Badosa
 - **License**: MIT License
+- **Compatibility**: v. 2.0
+
+## Go Library
+
+### JSON-stat Go
+Go library for working with JSON-stat (source: tools.html).
+
+- **Website**: https://github.com/jsonstat/go
+- **Author**: Xavier Badosa
+- **License**: Apache License, Version 2.0
 - **Compatibility**: v. 2.0
 
 ## TypeScript / Rust / WebAssembly Library

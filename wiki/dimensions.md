@@ -4,7 +4,7 @@
 
 **Sources**: raw/fullspec.html, raw/api.md
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-07-23
 
 ---
 
@@ -79,8 +79,10 @@ Identifies dimensions containing different metrics or measures (source: fullspec
 ```
 Metric role categories can include unit information (source: fullspec.html).
 
-### classification Role
-Default role for dimensions without special meaning (source: fullspec.html).
+### Dimensions Without a Role
+In the JSON-stat format, any dimension that is not listed under `time`, `geo`, or `metric` simply has no role (source: fullspec.html). There is no `classification` role in the format itself.
+
+The term "classification" is a **JavaScript Toolkit convention only**: when the Toolkit exposes a dimension's role (via `Dimension().role`), it uses the string `"classification"` for dimensions that the format leaves unroled. This is not part of the JSON-stat `role` object on the wire (source: api.md).
 
 ## Categories
 

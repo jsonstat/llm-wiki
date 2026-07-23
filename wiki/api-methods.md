@@ -4,7 +4,7 @@
 
 **Sources**: raw/api.md
 
-**Last updated**: 2026-05-20
+**Last updated**: 2026-07-23
 
 ---
 
@@ -69,12 +69,12 @@ Gets dimension information from a dataset (source: api.md).
 
 **Parameters**:
 - `dimid` (optional): Integer, string, or object `{ role: "geo" }`
-- `instance` (optional): Boolean - when true, returns category labels array
+- `instance` (optional, default `true`): when `false`, returns an array of category-label strings instead of a jsonstat instance
 
 **Returns**:
-- jsonstat instance when dimid is valid
+- jsonstat instance when dimid is valid (and `instance` is `true` or omitted)
+- Array of category-label strings when dimid is valid and `instance` is `false`
 - Array of jsonstat instances when dimid is not specified
-- Array of category labels when instance is false
 - null when dimid is invalid
 
 ### Category()

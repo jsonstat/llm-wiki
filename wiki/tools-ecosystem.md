@@ -4,7 +4,7 @@
 
 **Sources**: raw/tools.html
 
-**Last updated**: 2026-07-18
+**Last updated**: 2026-07-23
 
 ---
 
@@ -93,6 +93,14 @@
   - Website: https://github.com/jsonstat/wasm
   - Author: Xavier Badosa
   - License: MIT License
+  - Compatibility: v. 2.0
+
+### Go
+
+- **JSON-stat Go** - Go library for working with JSON-stat (source: tools.html)
+  - Website: https://github.com/jsonstat/go
+  - Author: Xavier Badosa
+  - License: Apache License, Version 2.0
   - Compatibility: v. 2.0
 
 ### TypeScript / Rust / WebAssembly
